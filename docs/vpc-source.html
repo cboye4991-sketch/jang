@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>VPC Jàng</title>
+<style>
+@page{size:1754px 1240px;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1754px;height:1240px;font-family:"DejaVu Sans",Arial,sans-serif;background:#fbfaf7;color:#1d2433;padding:40px 48px}
+header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #1d2433;padding-bottom:14px}
+h1{font-size:40px;letter-spacing:-.5px}
+h1 span{color:#0f7a5a}
+.meta{font-size:15px;color:#555;text-align:right;line-height:1.5}
+.hmw{margin:14px 0 44px;font-size:17px;line-height:1.45;background:#eef6f2;border-left:6px solid #0f7a5a;padding:12px 18px}
+.hmw b{color:#0f7a5a}
+.canvas{display:grid;grid-template-columns:1fr 80px 1.05fr;gap:0;height:790px}
+.panel{border:3px solid #1d2433;display:grid;position:relative;background:#fff}
+.cp{overflow:visible!important}
+.vm{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.vm .ps{grid-row:1/3;border-right:2px solid #1d2433}
+.vm .gc{border-bottom:2px solid #1d2433}
+.cp{border-radius:50%/48%;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;overflow:hidden}
+.cp .jobs{grid-column:2;grid-row:1/3;border-left:2px solid #1d2433;padding:190px 80px 40px 22px}
+.cp .gains{grid-column:1;grid-row:1;border-bottom:2px solid #1d2433;padding:120px 14px 12px 105px}
+.cp .pains{grid-column:1;grid-row:2;padding:18px 14px 40px 95px}
+.box{padding:18px 20px}
+.box h2{font-size:19px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+.box ul{list-style:none}
+.box li{font-size:14px;line-height:1.38;margin-bottom:6px;padding-left:12px;position:relative}
+.box li:before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:#0f7a5a;border-radius:50%}
+.cp .box li:before{background:#c2410c}
+.tag{font-size:11px;font-weight:700;color:#fff;background:#0f7a5a;border-radius:3px;padding:1px 5px;margin-right:4px}
+.cp .tag{background:#c2410c}
+.label{position:absolute;top:-30px;left:0;font-size:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.fit{display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#0f7a5a}
+.fit .arrow{font-size:52px;line-height:1}
+footer{margin-top:18px;display:grid;grid-template-columns:2.2fr 1fr;gap:20px;font-size:14.5px;line-height:1.45}
+.pv{background:#1d2433;color:#fff;padding:12px 18px;border-radius:4px}
+.pv b{color:#7ee0bb}
+.fitbox{border:2px solid #0f7a5a;padding:10px 14px;border-radius:4px}
+.muted{color:#555}
+</style></head><body>
+<header>
+ <div><h1>Value Proposition Canvas — <span>Jàng</span></h1>
+ <div class="muted" style="font-size:16px;margin-top:4px">Persona : Aminata Diallo, 17 ans · Terminale S2 · Kaffrine · Android d'entrée de gamme · WhatsApp · forfait au jour le jour</div></div>
+ <div class="meta">GET 409 — Atelier IA · Séance 2<br>Swiss UMEF University — Campus de Dakar<br>Cheikh BOYE · Adama DIOP</div>
+</header>
+<div class="hmw"><b>HMW définitif :</b> Comment pourrions-nous permettre aux élèves de Terminale scientifique des lycées de région, qui révisent seuls faute de professeur, de recevoir le soir même une explication fiable de leurs erreurs sur les exercices d'annales — depuis le téléphone qu'ils ont déjà et sans dépasser leur petit forfait data — afin d'aborder le Bac en sachant se corriger seuls ?</div>
+
+<div class="canvas">
+ <div class="panel vm"><div class="label">💡 Proposition de valeur</div>
+  <div class="box ps"><h2>📦 Produits &amp; Services</h2><ul>
+   <li><span class="tag">S1</span><b>Correction guidée</b> d'une réponse (texte ou photo) : ✅ juste / ❌ 1re erreur / 💡 méthode / ➡️ à toi</li>
+   <li><span class="tag">S2</span><b>Banque d'annales du Bac sénégalais</b> par série / matière / chapitre, avec <b>corrigé de référence validé</b> par un prof</li>
+   <li><span class="tag">S3</span><b>Exercice de remédiation</b> similaire juste après l'erreur</li>
+   <li><span class="tag">S4</span>Exercice du soir à l'heure choisie</li>
+   <li><span class="tag">S5</span>Mode « pas vu en classe » : cours en 5 lignes</li>
+   <li><span class="tag">S6</span>Bilan du dimanche</li>
+   <li style="margin-top:12px" class="muted">MVP S3 = S1 + S2 + S3, physique-chimie S2, 1 chapitre</li></ul></div>
+  <div class="box gc"><h2>🎁 Gain Creators</h2><ul>
+   <li><span class="tag">G1</span>Verdict immédiat + explication de l'erreur</li>
+   <li><span class="tag">G2</span>Méthode + exercice similaire à refaire seule</li>
+   <li><span class="tag">G3</span>Bilan : chapitres réussis, erreur fréquente</li>
+   <li><span class="tag">G4</span>Répétiteur individuel dans l'appli déjà installée</li>
+   <li><span class="tag">G5</span>Vrais sujets du Bac, attentes des correcteurs</li></ul></div>
+  <div class="box"><h2>💊 Pain Relievers</h2><ul>
+   <li><span class="tag">P1</span>Chaque réponse corrigée, 1re erreur expliquée</li>
+   <li><span class="tag">P2</span>Rappel de cours + exercices gradués</li>
+   <li><span class="tag">P3</span>Gratuit, texte ≤ 6 lignes, aucune vidéo</li>
+   <li><span class="tag">P4</span>Corrige <i>sa</i> réponse avant de montrer la solution</li>
+   <li><span class="tag">P5</span>Sessions de 10 min, reprise si coupure</li>
+   <li><span class="tag">P7</span>Comparaison au corrigé validé, doute signalé</li></ul></div>
+ </div>
+
+ <div class="fit"><div class="arrow">⇄</div>FIT</div>
+
+ <div class="panel cp"><div class="label" style="left:auto;right:0">👤 Profil client — Aminata</div>
+  <div class="box gains"><h2>🌟 Gains</h2><ul>
+   <li><span class="tag">G1</span>Savoir si c'est juste — et pourquoi</li>
+   <li><span class="tag">G2</span>Comprendre la méthode, refaire seule</li>
+   <li><span class="tag">G3</span>Voir qu'elle progresse</li>
+   <li><span class="tag">G4</span>Être accompagnée comme à Dakar</li>
+   <li><span class="tag">G5</span>Bac en confiance, mention, bourse</li></ul></div>
+  <div class="box pains"><h2>😣 Pains</h2><ul>
+   <li><span class="tag">P1</span>★★★ Aucun retour sur ses erreurs</li>
+   <li><span class="tag">P2</span>★★★ Chapitres jamais vus (pas de prof)</li>
+   <li><span class="tag">P3</span>★★★ Cours trop chers, vidéos trop lourdes</li>
+   <li><span class="tag">P4</span>★★ Annales sans corrigé, recopie</li>
+   <li><span class="tag">P5</span>★★ Révise tard, peu de temps</li>
+   <li><span class="tag">P6</span>★★ Anxiété, injustice / Dakar</li>
+   <li><span class="tag">P7</span>★ Peur d'apprendre faux</li></ul></div>
+  <div class="box jobs"><h2>🔧 Jobs to be done</h2><ul>
+   <li><span class="tag">J1</span>Faire les annales et <b>vérifier ses réponses</b></li>
+   <li><span class="tag">J2</span>Comprendre la méthode pour refaire seule</li>
+   <li><span class="tag">J3</span>Rattraper les chapitres non enseignés</li>
+   <li><span class="tag">J4</span>Réviser le soir avec le forfait du jour</li>
+   <li><span class="tag">J5</span>Tenir sa promesse : université, bourse</li>
+   <li><span class="tag">J6</span>Ne pas « sacrifier » la physique</li></ul></div>
+ </div>
+</div>
+
+<footer>
+ <div class="pv"><b>Notre plus-value :</b> pour les élèves de Terminale scientifique des régions qui révisent seuls, Jàng est un correcteur d'annales du Bac sur WhatsApp qui explique la première erreur de chaque réponse et fait aussitôt refaire un exercice similaire — le soir même, pour quelques messages de data — contrairement aux PDF sans corrigé, aux cours trop chers et aux vidéos trop lourdes, parce que chaque correction s'appuie sur un corrigé validé par un professeur.</div>
+ <div class="fitbox"><b>FIT check :</b> chaque Pain Reliever répond à un Pain · FIT fort sur P1 → G1/G2 · partiel sur P2, P5 (SHOULD S3) · écartés : vidéos, classement, appli à installer.</div>
+</footer>
+</body></html>
