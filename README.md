@@ -59,7 +59,7 @@ Un **bot WhatsApp** qui :
 | S2 — Idéation & Prompt Engineering | [6 Chapeaux](docs/chapeaux-bono.md) · [VPC](docs/vpc.md) · [HMW définitif](docs/hmw-definitif.md) · [Journal P1–P5](prompts/journal-de-prompts.md#séance-2--les-5-prompts-métier-tp-guidé--prompts-vpc--hmw) · [Pitch 2 min](soutenance/pitch-hmw-s2.md) | ✅ |
 | S3 — Multi-agents Dify | Workflow « jang » : Chercheur → SI/SINON → Rédacteur ([description](dify/prompts-agents.md)) | ✅ dans Dify |
 | S4 — MVP Lovable | Reporté volontairement — [prompt webhook prêt](dify/webhook/prompt-lovable.md) | ⏸️ |
-| S5 — RAG & intégration | [Base `Jang_KB_v1`](dify/knowledge/) · [Schéma V2](docs/architecture-v2.png) · [Plan de tests](dify/tests-rag.md) · [Journal S5](prompts/journal-de-prompts.md#séance-5--rag--intégration-dify) · [Note d'éthique](docs/note-ethique-rag.md) · [Plan B](soutenance/plan-b-s6.md) | 🟡 Base créée et branchée dans Dify — clé Gemini, publication et tests à faire |
+| S5 — RAG & intégration | [Base `Jang_KB_v1`](dify/knowledge/) · [Schéma V2](docs/architecture-v2.png) · [Plan de tests](dify/tests-rag.md) · [Journal S5](prompts/journal-de-prompts.md#séance-5--rag--intégration-dify) · [Note d'éthique](docs/note-ethique-rag.md) · [Plan B](soutenance/plan-b-s6.md) | ✅ Publié dans Dify (Gemini), 7/8 tests OK — captures d'écran à faire |
 
 ## Équipe
 

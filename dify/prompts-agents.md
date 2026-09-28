@@ -36,8 +36,10 @@ RÈGLES RAG (prioritaires sur l'étape 2) :
   « JNG-PC-01 — corrigé Jàng, en attente de validation par un professeur ».
 - Si l'élève envoie seulement l'ID (ex. « JNG-PC-07 : a = 8,5 m/s² »), reprends l'énoncé dans la base :
   l'énoncé est alors considéré comme complet.
-- Si l'élève dit ne pas avoir vu un chapitre, résume la fiche de cours correspondante de la base dans
-  NOTION À REVOIR et propose l'exercice du chapitre dans EXERCICE SIMILAIRE.
+- Si l'élève dit ne pas avoir vu un chapitre (demande de cours), ce n'est JAMAIS un cas INSUFFISANT,
+  même sans exercice ni réponse. Retourne la sortie SUFFISANTE avec RÉPONSE DE L'ÉLÈVE : « aucune —
+  demande de cours », PREMIÈRE ERREUR : « Aucune (demande de cours) », NOTION À REVOIR : la fiche de
+  cours du chapitre tirée de la base, EXERCICE SIMILAIRE : l'exercice du chapitre dans la base.
 - Si l'exercice n'est pas dans la base, applique ta méthode habituelle et écris dans SOURCES
   « hors base Jàng — résolution non vérifiée par un professeur ».
 - Si la question ne concerne ni un exercice ni un chapitre de Physique-Chimie ou de Mathématiques
@@ -46,13 +48,29 @@ RÈGLES RAG (prioritaires sur l'étape 2) :
 
 **Pourquoi ce choix plutôt qu'un nouveau workflow :** le Chercheur S3 résolvait l'exercice lui-même (« refaite étape par étape à partir des seules données de l'énoncé »), ce qui laisse un risque d'erreur du modèle. Avec le RAG, dès que l'exercice est dans la base, la référence n'est plus inventée : elle est recopiée depuis un corrigé vérifié. Le SI/SINON et le Rédacteur de S3 restent inchangés.
 
+## Ce qui a été ajouté au prompt SYSTEM du Rédacteur (S5, après les tests)
+
+Deux règles insérées dans ses RÈGLES STRICTES :
+
+```
+- CAS PAS VU EN CLASSE : si l'élève n'a envoyé aucune réponse à corriger (il dit ne pas avoir vu un
+  chapitre), ne fais ni ✅ ni ❌ : remplace-les par une section « 📚 LE COURS EN BREF » (3 à 5 lignes
+  tirées de NOTION À REVOIR), puis garde 💡 et ➡️.
+- Écris les formules en texte simple lisible sur WhatsApp (ex. : C = n/V, 500 mL = 0,500 L, 10^-3).
+  N'utilise jamais LaTeX, ni $, ni \frac, ni \text.
+```
+
+Raisons : au test T1, Gemini écrivait `$C = \frac{n}{V}$` (illisible sur WhatsApp) ; au test T5, il répondait « Aucune erreur, bravo » à un élève qui demandait un cours.
+
 ## Prompts S3 d'origine
 
 Prompts complets du Chercheur et du Rédacteur : voir l'application « jang (sauvegarde S3) » dans Dify, ou l'onglet du nœud dans le workflow.
 
 ## Modèles
 
-| Nœud | S3 | Prévu S5 |
+| Nœud | S3 | S5 (publié le 28/09) |
 |---|---|---|
-| Chercheur, Rédacteur | OpenAI `gpt-5.6-luna` (crédits d'essai Dify, épuisés le 28/09) | Gemini (clé gratuite Google AI Studio) |
-| Embeddings de la base | — | `gemini-embedding-001` (recherche sémantique) |
+| Chercheur (temp. 0), Rédacteur (temp. 0,3) | OpenAI `gpt-5.6-luna` (crédits d'essai Dify, épuisés le 28/09) | **`gemini-3.5-flash-lite`** (clé gratuite Google AI Studio), 1 nouvelle tentative automatique |
+| Embeddings de la base | — | **`gemini-embedding-001`**, recherche sémantique, Top K 3 |
+
+Versions publiées dans Dify : « S5 RAG + Gemini », puis « S5 RAG v2 » (cas « pas vu en classe »).

@@ -285,7 +285,11 @@ aucune donnée personnelle.
 
 **Pourquoi :** en S3, le Chercheur refaisait lui-même la résolution de référence : une erreur du modèle devenait une correction fausse (Chapeau Noir R1). Avec le RAG, quand l'exercice est dans la base, la référence est **recopiée** depuis un corrigé vérifié ; le SI/SINON et le Rédacteur de S3 ne changent pas. Nouvelles règles : l'élève peut n'envoyer que l'ID de l'exercice ; « pas vu en classe » renvoie à la fiche de cours ; un exercice hors base est signalé comme non vérifié.
 
-**Résultat et note :** *[à compléter après les tests T1–T8 — bloqué : crédits d'essai Dify épuisés, bascule sur Gemini en cours]*
+**Résultat (28/09, Gemini `gemini-3.5-flash-lite`) :** 7 tests sur 8 validés ([détail](../dify/tests-rag.md#b-tests-de-bout-en-bout-workflow--exécuter-ou-script-webhooktest-apish)). Sur T1 à T4, le Chercheur recopie le corrigé de la base et cite « JNG-PC-xx — corrigé Jàng » ; l'erreur pointée est toujours la bonne. T6 (météo) et T7 (SVT) sont refusés par INSUFFISANT. T8 (hors base) est bien marqué « non vérifié ».
+
+**Note : 4/5.** Le RAG fait ce qu'on attendait : plus de résolution improvisée quand l'exercice est dans la base. −1 : deux défauts vus pendant les tests, corrigés par une itération.
+
+**Itération :** (1) Gemini écrivait les formules en LaTeX (`$\frac{n}{V}$`), illisible sur WhatsApp → règle « texte simple, jamais LaTeX » ajoutée au Rédacteur. (2) Pour « je n'ai jamais vu l'effet photoélectrique », le Rédacteur répondait « Aucune erreur, bravo », et le Chercheur répondait parfois INSUFFISANT → règle « demande de cours = jamais INSUFFISANT » dans le Chercheur et section « 📚 LE COURS EN BREF » dans le Rédacteur. Retest : cours sur le dipôle RC + exercice de la base ✅.
 
 ## S5-3 — Prompt webhook MVP ↔ Dify (prompt E3 adapté)
 

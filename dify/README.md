@@ -2,7 +2,7 @@
 
 > **GET 409 · Séance 5 — Intégration & RAG avec Dify**, adaptée à Jàng.
 > **État au 28/09/2026 :** le workflow S3 « jang » existait déjà dans Dify. La base **Jang_KB_v1** a été créée et branchée devant le Chercheur (détail : [`prompts-agents.md`](prompts-agents.md)). La séance 4 (MVP) est reportée volontairement ; le branchement au MVP est prêt dans [`webhook/prompt-lovable.md`](webhook/prompt-lovable.md).
-> ⚠️ Les crédits d'essai Dify sont épuisés : il faut une clé API (Gemini gratuite) pour que les agents et la recherche sémantique tournent.
+> ✅ **Publié le 28/09/2026** (version « S5 RAG v2 ») avec la clé Gemini gratuite : `gemini-3.5-flash-lite` pour les agents, `gemini-embedding-001` pour la base. 7 tests sur 8 validés ([plan de tests](tests-rag.md)).
 
 ## Ce qui tourne dans Dify
 
@@ -30,12 +30,12 @@ Tous les résultats du CSV ont été recalculés. Les exercices sont **rédigés
 
 - Dify → **Connaissance** → **Jang_KB_v1** : 2 documents 🟢 *Disponible* (CSV + fiches). → 📸 **Capture L2-a** à faire
 - Tests de récupération R1–R4 réussis en recherche sémantique (voir [plan de tests](tests-rag.md)).
-- Mode actuel : **Économique** (mots-clés), le temps d'ajouter la clé Gemini. Ensuite : Paramètres de la base → **Haute qualité** + `gemini-embedding-001` → Recherche **sémantique**, Top K 3.
+- Mode : **Haute qualité**, `gemini-embedding-001`, recherche **sémantique**, Top K 3 (le mode Économique a été testé et écarté).
 
 ## Partie 2 — Workflow ✅ (S3 existant + nœud RAG ajouté le 28/09)
 
 - Studio → **jang** : nœud **Récupération Jang_KB_v1** entre Début et Chercheur ; contexte injecté dans le Chercheur ([détail](prompts-agents.md)).
-- Reste à faire après la clé Gemini : choisir le modèle Gemini dans le Chercheur et le Rédacteur, **Exécuter test** (T1, T6). → 📸 **Capture L2-b** (canevas complet)
+- Modèles `gemini-3.5-flash-lite`, workflow **publié**. → 📸 **Capture L2-b** à faire (canevas complet)
 
 ## Partie 3 — Publication et API (≈ 10 min)
 
@@ -61,7 +61,7 @@ Coller le prompt de [`webhook/prompt-lovable.md`](webhook/prompt-lovable.md) dan
 | # | Livrable | Pts | État |
 |---|---|---|---|
 | L1 | MVP V2 en ligne avec formulaire RAG | 30 | ⏸️ Bloqué tant que S4 n'est pas fait — prompt prêt |
-| L2 | Pipeline RAG : capture base indexée + agent connecté + URL workflow | 30 | 🟡 Base créée et branchée — manque la clé Gemini, la publication et les captures |
+| L2 | Pipeline RAG : capture base indexée + agent connecté + URL workflow | 30 | ✅ Publié et testé — reste à faire les 2 captures d'écran |
 | L3 | Schéma d'architecture V2 | 20 | ✅ [`docs/architecture-v2.png`](../docs/architecture-v2.png) · [PDF](../docs/architecture-v2.pdf) |
 | L4 | Journal de prompts S5 (≥ 3 prompts) | 20 | ✅ Rédigé — résultats des tests à compléter ([journal](../prompts/journal-de-prompts.md#séance-5--rag--intégration-dify)) |
 | S6 | Note d'éthique d'une page | — | ✅ [`docs/note-ethique-rag.md`](../docs/note-ethique-rag.md) |
