@@ -35,7 +35,7 @@ Un **bot WhatsApp** qui :
 2. reçoit la réponse de l'élève (texte ou photo) ;
 3. corrige **étape par étape**, en expliquant l'erreur, dans des messages courts et légers en data.
 
-Outils envisagés : Typebot / Landbot + WhatsApp, Google Sheets pour la banque d'exercices, un modèle d'IA (Claude) piloté par nos prompts.
+**Depuis S5 :** le moteur de correction est un workflow **Dify** à deux agents (CHERCHEUR → CORRECTEUR) branché sur une base de connaissances RAG `Jang_KB_v1` (exercices + corrigés de référence). Voir [`dify/`](dify/README.md) et le [schéma d'architecture V2](docs/architecture-v2.png).
 
 ## Structure du dépôt
 
@@ -47,8 +47,9 @@ Outils envisagés : Typebot / Landbot + WhatsApp, Google Sheets pour la banque d
 | `04-prototype/` | Prototype | Fonctionnalités MVP, maquettes |
 | `05-test/` | Test | Retours utilisateurs |
 | `prompts/` | Transverse | Journal de prompts |
-| `docs/` | S2 — Idéation & Décision | 6 Chapeaux, VPC, HMW définitif |
-| `soutenance/` | — | Pitch 90 s (S1), pitch HMW 2 min (S2) |
+| `docs/` | S2 · S5 | 6 Chapeaux, VPC, HMW définitif · schéma d'architecture V2, note d'éthique RAG |
+| `dify/` | S3 · S5 — Agents & RAG | Guide Dify, prompts des agents, base de connaissances, plan de tests, webhook |
+| `soutenance/` | — | Pitch 90 s (S1), pitch HMW 2 min (S2), Plan B démo S6 |
 
 ## Avancement
 
@@ -56,7 +57,9 @@ Outils envisagés : Typebot / Landbot + WhatsApp, Google Sheets pour la banque d
 |---|---|---|
 | S1 — Empathie | [Carte d'empathie](01-empathize/carte-empathie.md) · [HMW draft](02-define/hmw.md) · [Journal de prompts](prompts/journal-de-prompts.md) | ✅ |
 | S2 — Idéation & Prompt Engineering | [6 Chapeaux](docs/chapeaux-bono.md) · [VPC](docs/vpc.md) · [HMW définitif](docs/hmw-definitif.md) · [Journal P1–P5](prompts/journal-de-prompts.md#séance-2--les-5-prompts-métier-tp-guidé--prompts-vpc--hmw) · [Pitch 2 min](soutenance/pitch-hmw-s2.md) | ✅ |
-| S3 — Multi-agents Dify | Agent correcteur, workflow, schéma d'architecture | ⏳ |
+| S3 — Multi-agents Dify | Workflow CHERCHEUR → CORRECTEUR : [prompts](dify/prompts-agents.md) · [guide](dify/README.md) | 📦 Prêt à monter dans Dify |
+| S4 — MVP Lovable | Reporté volontairement — [prompt webhook prêt](dify/webhook/prompt-lovable.md) | ⏸️ |
+| S5 — RAG & intégration | [Base `Jang_KB_v1`](dify/knowledge/) · [Schéma V2](docs/architecture-v2.png) · [Plan de tests](dify/tests-rag.md) · [Journal S5](prompts/journal-de-prompts.md#séance-5--rag--intégration-dify) · [Note d'éthique](docs/note-ethique-rag.md) · [Plan B](soutenance/plan-b-s6.md) | 📦 Dify à monter, tests à faire |
 
 ## Équipe
 

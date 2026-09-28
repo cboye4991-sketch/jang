@@ -242,6 +242,79 @@ Ne donne PAS la solution complète en premier.
 
 ---
 
+# Séance 5 — RAG & intégration Dify
+
+> Livrable L4 (min. 3 prompts : RAG Knowledge + webhook + test de cohérence).
+> S3 (agents Dify) n'avait pas été fait : les prompts des agents CHERCHEUR / CORRECTEUR sont documentés ici. S4 (MVP) est reporté ; le prompt webhook est prêt mais pas encore exécuté.
+> Les notes marquées *[à compléter]* dépendent des tests dans Dify : ne pas les remplir avant d'avoir vu le résultat.
+
+## S5-1 — Préparer les documents de la base RAG (prompt S1 de la bibliothèque)
+
+- **Outil :** Claude · **Technique :** Prompt structuré (données + format de sortie imposé)
+
+**Prompt :**
+```
+Je prépare la base de connaissances RAG de Jàng, un correcteur d'exercices du Bac
+sénégalais (Physique-Chimie, Terminale S2) qui compare la réponse de l'élève à un
+corrigé de référence.
+Produis :
+1. Un CSV (séparateur virgule, en-têtes en ligne 1) avec une ligne par exercice :
+   ID, Serie, Matiere, Chapitre, Enonce, Donnees, Corrige_reference, Resultat_final,
+   Erreur_frequente, Exercice_similaire, Reponse_similaire, Source, Statut_validation,
+   Mise_a_jour — un exercice type Bac par chapitre du programme de Terminale S2.
+2. Un Markdown avec, pour chaque chapitre, un titre H2 et un rappel de cours
+   de 5 lignes maximum (mode « pas vu en classe »).
+3. La liste de ce que la base ne couvre pas.
+Contraintes : corrigés détaillés et vérifiables, unités SI, virgule décimale,
+aucune donnée personnelle.
+```
+
+**Résultat :** [`dify/knowledge/jang_exercices_pc_ts2.csv`](../dify/knowledge/jang_exercices_pc_ts2.csv) (14 exercices) et [`jang_fiches_cours_pc_ts2.md`](../dify/knowledge/jang_fiches_cours_pc_ts2.md) / `.pdf` (14 fiches + périmètre).
+
+**Critique : 4/5.** Structure directement indexable, une colonne « erreur fréquente » utile au CORRECTEUR. Tous les résultats ont été **recalculés à part** (script Python) avant d'être gardés : c'est indispensable, un corrigé faux dans la base rendrait toutes les corrections fausses. −1 : ce ne sont pas des annales officielles, et aucun professeur ne les a encore relues → colonne `Statut_validation = À faire valider`.
+
+**Itération :** passer la longueur de morceau de 300 (tutoriel) à 500 pour le CSV, car une ligne (énoncé + corrigé) dépasse 300 tokens ; garder 300 pour les fiches.
+
+---
+
+## S5-2 — Prompts système des agents CHERCHEUR et CORRECTEUR (S3 rattrapé)
+
+- **Outil :** Dify (workflow `Jang_Correcteur_v1`) · **Technique :** Rôle + règles + `{{#context#}}` + format de sortie strict ; séparation des tâches entre deux agents
+
+**Prompts :** texte complet dans [`dify/prompts-agents.md`](../dify/prompts-agents.md).
+
+**Pourquoi deux agents :** le CHERCHEUR (température 0) ne fait que retrouver et recopier le corrigé de référence depuis la base ; le CORRECTEUR ne voit que cette fiche. Un seul agent aurait tendance à résoudre l'exercice lui-même au lieu de s'appuyer sur la base, ce qui annulerait la promesse de fiabilité du VPC (P7).
+
+**Garde-fous écrits dans les prompts :** intention CORRECTION / COURS / HORS_BASE ; phrase fixe pour le hors-base ; jamais la solution complète ; 6 lignes maximum ; source citée.
+
+**Résultat et note :** *[à compléter après les tests T1–T7 du [plan de tests](../dify/tests-rag.md)]*
+
+---
+
+## S5-3 — Prompt webhook MVP ↔ Dify (prompt E3 adapté)
+
+- **Outil :** Lovable (ou Bolt) · **Technique :** Prompt de génération d'interface avec spécification API
+
+**Prompt :** [`dify/webhook/prompt-lovable.md`](../dify/webhook/prompt-lovable.md).
+
+**Adaptations par rapport au modèle GreenSprint :** interface qui imite WhatsApp (notre canal cible) ; `inputs.query` et lecture de `data.outputs.answer` (API workflow, pas chatflow) ; timeout 15 s car deux appels LLM à la suite ; aucune image ni vidéo (contrainte data).
+
+**Résultat :** *[pas encore exécuté — S4 reporté]*. En attendant, l'API est testée sans interface avec [`dify/webhook/test-api.sh`](../dify/webhook/test-api.sh).
+
+---
+
+## S5-4 — Test de cohérence de la base (prompt S2 de la bibliothèque)
+
+- **Outil :** Dify → Test de récupération · **Technique :** Zero-Shot, 5 requêtes (directes, indirectes, hors-base)
+
+**Requêtes :** R1 à R5 du [plan de tests](../dify/tests-rag.md#a-test-de-récupération-dify--connaissances--jang_kb_v1--test-de-récupération).
+
+**Résultat et note :** *[à compléter — chunks remontés, scores, captures]*
+
+**Point d'attention prévu :** en mode Économique (index inversé, plan gratuit), R3 et R4 formulées avec d'autres mots que ceux de la base risquent de ne rien remonter. Si c'est le cas, le noter ici comme limite et demander aux élèves de donner l'ID de l'exercice.
+
+---
+
 ## Modèle pour les prochaines entrées
 
 ```
