@@ -3,7 +3,7 @@
 > Livrable S6 (préparé en S5) · GET 409 · Équipe Cheikh BOYE & Adama DIOP · Septembre 2026
 > Construite avec le prompt S4 « Rédiger la note d'éthique RAG » (Chain-of-Thought), adapté à Jàng. Une page.
 
-**Le système :** l'élève envoie sa réponse à un exercice ; un workflow Dify (Chercheur → Correcteur) la compare à un corrigé de référence stocké dans la base `Jang_KB_v1` (14 exercices type Bac + 14 fiches de cours, Physique-Chimie Terminale S2) et renvoie la première erreur en 6 lignes.
+**Le système :** l'élève envoie sa réponse à un exercice ; le workflow Dify « jang » (Chercheur → SI/SINON → Rédacteur) la compare à un corrigé de référence stocké dans la base `Jang_KB_v1` (14 exercices type Bac + 14 fiches de cours, Physique-Chimie Terminale S2) et renvoie la première erreur en 90 mots au maximum.
 
 ## 1. Qualité et biais des données
 
@@ -12,13 +12,13 @@
 
 ## 2. Confidentialité et souveraineté
 
-**Constat.** La base ne contient **aucune donnée personnelle** : seulement des énoncés et des corrigés. Mais chaque question d'élève transite par Dify Cloud et par le fournisseur du modèle (hors Sénégal), avec un identifiant `user`. Les élèves visés ont 17 ans en moyenne : ce sont des mineurs. La loi sénégalaise n° 2008-12 sur les données personnelles et la CDP s'appliquent dès qu'on relie un message à un numéro WhatsApp. Enfin, la clé API est visible dans le code du prototype.
+**Constat.** La base ne contient **aucune donnée personnelle** : seulement des énoncés et des corrigés. Mais chaque question d'élève transite par Dify Cloud et par le fournisseur du modèle (Google Gemini, hors Sénégal), avec un identifiant `user`. Les élèves visés ont 17 ans en moyenne : ce sont des mineurs. La loi sénégalaise n° 2008-12 sur les données personnelles et la CDP s'appliquent dès qu'on relie un message à un numéro WhatsApp. Enfin, la clé API est visible dans le code du prototype.
 **Recommandation.** Identifiant `user` anonyme (jamais le numéro de téléphone) ; ne pas demander de nom ; informer l'élève et ses parents que les messages sont traités par une IA hébergée à l'étranger. Clé API dans une fonction serveur dès la version de production, jamais dans le dépôt GitHub.
 
 ## 3. Fiabilité et responsabilité
 
 **Constat.** Même avec le RAG, le modèle peut mal lire un calcul ou juger fausse une réponse juste. Pour un élève qui révise seul, une mauvaise correction est pire que pas de correction (Chapeau Noir, R1). La responsabilité revient à l'équipe qui publie l'outil, pas à l'élève.
-**Recommandation.** Le Correcteur doit pointer une seule erreur, citer l'exercice source et dire « demande à un professeur » en cas de doute. Refuser les questions hors base au lieu d'improviser (test T6/T7). Mesurer le taux d'erreurs de correction sur un jeu de réponses d'élèves avant toute diffusion (hypothèse H3).
+**Recommandation.** Le Rédacteur pointe une seule erreur, le Chercheur cite l'exercice source, et chaque correction rappelle « en cas de doute, demande à un professeur ». Refuser les questions hors programme au lieu d'improviser (sortie INSUFFISANT, tests T6/T7) et signaler « non vérifié » tout exercice hors base. Mesurer le taux d'erreurs de correction sur un jeu de réponses d'élèves avant toute diffusion (hypothèse H3).
 
 ## 4. Impact socio-économique
 

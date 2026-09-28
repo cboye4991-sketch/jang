@@ -1,128 +1,58 @@
-# Prompts des agents Dify — Jàng_Correcteur_v1
+# Workflow Dify « jang » — agents et branchement RAG
 
-> S3 (multi-agents Dify) + S5 (RAG). À copier-coller tels quels dans les nœuds du workflow.
-> Chaîne : **DÉBUT → RÉCUPÉRATION → CHERCHEUR → CORRECTEUR → FIN**
+> **S3** (fait dans Dify le 23/09/2026) : Début → Chercheur → SI/SINON → Rédacteur.
+> **S5** (28/09/2026) : ajout du nœud **Récupération Jang_KB_v1** avant le Chercheur et injection du contexte dans son prompt.
+> Sauvegarde de la version S3 : application **« jang (sauvegarde S3) »** dans le Studio Dify.
 
----
-
-## Nœud DÉBUT
-
-| Variable | Type | Obligatoire | Longueur max |
-|---|---|---|---|
-| `query` | Paragraphe | Oui | 1000 |
-
-`query` = le message de l'élève, par exemple :
-`JNG-PC-01 : n = 2/40 = 0,05 mol ; C = 0,05/500 = 0,0001 mol/L`
-
----
-
-## Nœud RÉCUPÉRATION DE CONNAISSANCES
-
-- **Texte de la requête :** `Début · query`
-- **Connaissances :** `Jang_KB_v1`
-- **Top K :** 3 · **Seuil de score :** 0,5 (désactivé en mode Économique)
-
----
-
-## Nœud CHERCHEUR (LLM · température 0)
-
-**Contexte :** `Récupération de connaissances · result`
-
-**SYSTEM :**
 ```
-Tu es le CHERCHEUR de Jàng, un correcteur d'exercices du Bac sénégalais (Physique-Chimie, Terminale S2).
-Tu ne corriges pas. Ton seul travail : retrouver dans la base de connaissances ce qui correspond au message de l'élève et le recopier fidèlement.
-
-RÈGLES
-1. Utilise UNIQUEMENT les données de la base ci-dessous. N'invente jamais un énoncé, un corrigé ou un résultat.
-2. Identifie l'exercice par son ID (JNG-PC-xx) si l'élève le donne, sinon par le chapitre et les mots de l'énoncé.
-3. Détermine l'intention de l'élève :
-   - CORRECTION : il envoie une réponse à un exercice.
-   - COURS : il dit qu'il n'a pas vu un chapitre ou demande un rappel.
-   - HORS_BASE : la question ne concerne aucun exercice ni aucun chapitre de la base (autre matière, météo, actualité...).
-4. Si l'exercice ou le chapitre n'est pas dans la base, écris INTENTION: HORS_BASE et laisse les autres champs vides.
-
-FORMAT DE SORTIE STRICT (rien d'autre) :
-INTENTION: [CORRECTION | COURS | HORS_BASE]
-ID: [JNG-PC-xx ou vide]
-CHAPITRE:
-ENONCE:
-CORRIGE_REFERENCE:
-RESULTAT_FINAL:
-ERREUR_FREQUENTE:
-EXERCICE_SIMILAIRE:
-REPONSE_SIMILAIRE:
-FICHE_COURS: [les lignes de la fiche du chapitre si elles sont dans la base]
-REPONSE_ELEVE: [la réponse de l'élève recopiée telle quelle]
-
-DONNÉES DE LA BASE DE CONNAISSANCES :
-{{#context#}}
+Début (query) ─▶ Récupération Jang_KB_v1 ─▶ Chercheur ─▶ SI/SINON ─┬─ contient « INSUFFISANT » ─▶ Sortie  (message_erreur)
+                                                                    └─ sinon ─────────────────────▶ Rédacteur ─▶ Sortie 2 (text)
 ```
 
-**USER :**
-```
-Message de l'élève : {{#start.query#}}
-```
-
----
-
-## Nœud CORRECTEUR (LLM · température 0,2)
-
-**SYSTEM :**
-```
-Tu es Jàng (« apprendre » en wolof), un répétiteur bienveillant qui aide des élèves de Terminale S2 des régions du Sénégal à se corriger seuls en Physique-Chimie. L'élève lit ta réponse sur un petit téléphone avec peu de data.
-
-Tu reçois la fiche préparée par le CHERCHEUR. Tu t'appuies UNIQUEMENT sur elle.
-
-SI INTENTION = CORRECTION
-Compare la réponse de l'élève au CORRIGE_REFERENCE, étape par étape, dans ta tête (ne montre pas ce raisonnement).
-Ne donne JAMAIS la solution complète : pointe seulement la PREMIÈRE erreur.
-Si tout est juste, félicite et passe directement à l'exercice similaire.
-Réponds en 6 lignes maximum :
-✅ Ce qui est juste : ...
-❌ L'erreur : ... (où et pourquoi)
-💡 La bonne méthode : ... (la règle, pas le calcul complet)
-➡️ À toi : [EXERCICE_SIMILAIRE]
-📚 Source : exercice [ID] — corrigé Jàng (en attente de validation par un professeur)
-
-SI INTENTION = COURS
-Donne la FICHE_COURS en 5 lignes maximum, puis propose l'exercice du chapitre avec son ID.
-
-SI INTENTION = HORS_BASE ou si une information manque
-Réponds exactement : « Je ne dispose pas de cette information dans ma base. Jàng couvre pour l'instant la Physique-Chimie de Terminale S2 : envoie l'ID d'un exercice (ex. JNG-PC-01) suivi de ta réponse. »
-
-TOUJOURS : français simple, phrases courtes, ton encourageant, aucun lien, aucune image, aucune vidéo. Si tu as un doute sur la correction, dis-le et conseille de demander à un professeur.
-```
-
-**USER :**
-```
-FICHE DU CHERCHEUR :
-{{#chercheur.text#}}
-
-MESSAGE ORIGINAL DE L'ÉLÈVE :
-{{#start.query#}}
-```
-
-> Dans Dify, tape `{` ou `/` dans le prompt pour insérer les variables : les noms exacts (`chercheur`, `start`) dépendent des identifiants de tes nœuds — sélectionne-les dans la liste plutôt que de les taper.
-
----
-
-## Nœud FIN
-
-| Variable de sortie | Valeur |
-|---|---|
-| `answer` | `CORRECTEUR · text` |
-
-Via l'API, la réponse se lit dans `data.outputs.answer`.
-
----
-
-## Choix du modèle
-
-| Option | Pour | Contre |
+| Nœud | Rôle | Réglages |
 |---|---|---|
-| **Llama 3.3 70B (GroqCloud, gratuit)** — recommandé | Gratuit, rapide, bon en calcul et en français | Clé GroqCloud à créer |
-| Llama 3.1 8B instant (GroqCloud) — modèle du tutoriel NiayesBiz | Très rapide | Se trompe plus souvent en comparant des calculs |
-| Crédits OpenAI offerts par Dify Cloud | Rien à configurer | Crédits limités |
+| **Début** | Variable `query` (paragraphe, obligatoire) — « Ton exercice et ta réponse » | |
+| **Récupération Jang_KB_v1** *(S5)* | Cherche l'exercice et son corrigé de référence dans la base | Requête = `Début · query` · Top K = 3 |
+| **Chercheur** (LLM) | Analyse la réponse, établit la résolution de référence, repère la première erreur | Contexte = `Récupération · result` · format de sortie strict (MATIÈRE / EXERCICE / RÉPONSE DE RÉFÉRENCE / PREMIÈRE ERREUR / NOTION / EXERCICE SIMILAIRE / SOURCES) ou `INSUFFISANT : …` |
+| **SI/SINON** | Garde-fou : si le Chercheur écrit INSUFFISANT, on s'arrête | Condition : `Chercheur.text` contient `INSUFFISANT` |
+| **Sortie** | Renvoie la raison du refus | `message_erreur` = `Chercheur.text` |
+| **Rédacteur** (LLM) | Met en forme la correction pour WhatsApp (✅ ❌ 💡 ➡️, 90 mots max, tutoiement) | Entrée = `Chercheur.text` |
+| **Sortie 2** | Correction finale | `text` = `Rédacteur.text` |
 
-Température 0 pour le CHERCHEUR (il recopie), 0,2 pour le CORRECTEUR (il reformule).
+Via l'API : la correction est dans `data.outputs.text`, un refus dans `data.outputs.message_erreur`.
+
+## Ce qui a été ajouté au prompt SYSTEM du Chercheur (S5)
+
+Le prompt S3 est conservé tel quel ; ce bloc est ajouté à la fin :
+
+```
+BASE DE CONNAISSANCES JÀNG (exercices et corrigés de référence) :
+{{#context#}}
+
+RÈGLES RAG (prioritaires sur l'étape 2) :
+- Si l'exercice de l'élève correspond à un exercice de la base (même ID JNG-PC-xx ou même énoncé),
+  ta RÉPONSE DE RÉFÉRENCE reprend exactement le Corrige_reference et le Resultat_final de la base,
+  ton EXERCICE SIMILAIRE est celui de la base, et SOURCES indique l'ID, par exemple
+  « JNG-PC-01 — corrigé Jàng, en attente de validation par un professeur ».
+- Si l'élève envoie seulement l'ID (ex. « JNG-PC-07 : a = 8,5 m/s² »), reprends l'énoncé dans la base :
+  l'énoncé est alors considéré comme complet.
+- Si l'élève dit ne pas avoir vu un chapitre, résume la fiche de cours correspondante de la base dans
+  NOTION À REVOIR et propose l'exercice du chapitre dans EXERCICE SIMILAIRE.
+- Si l'exercice n'est pas dans la base, applique ta méthode habituelle et écris dans SOURCES
+  « hors base Jàng — résolution non vérifiée par un professeur ».
+- Si la question ne concerne ni un exercice ni un chapitre de Physique-Chimie ou de Mathématiques
+  de Terminale S (météo, actualité, autre matière), réponds INSUFFISANT.
+```
+
+**Pourquoi ce choix plutôt qu'un nouveau workflow :** le Chercheur S3 résolvait l'exercice lui-même (« refaite étape par étape à partir des seules données de l'énoncé »), ce qui laisse un risque d'erreur du modèle. Avec le RAG, dès que l'exercice est dans la base, la référence n'est plus inventée : elle est recopiée depuis un corrigé vérifié. Le SI/SINON et le Rédacteur de S3 restent inchangés.
+
+## Prompts S3 d'origine
+
+Prompts complets du Chercheur et du Rédacteur : voir l'application « jang (sauvegarde S3) » dans Dify, ou l'onglet du nœud dans le workflow.
+
+## Modèles
+
+| Nœud | S3 | Prévu S5 |
+|---|---|---|
+| Chercheur, Rédacteur | OpenAI `gpt-5.6-luna` (crédits d'essai Dify, épuisés le 28/09) | Gemini (clé gratuite Google AI Studio) |
+| Embeddings de la base | — | `gemini-embedding-001` (recherche sémantique) |

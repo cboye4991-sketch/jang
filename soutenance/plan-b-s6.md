@@ -14,24 +14,44 @@
 **Élève :** `JNG-PC-01 : n = 2/40 = 0,05 mol ; C = 0,05/500 = 0,0001 mol/L`
 
 ```
-✅ Ce qui est juste : ton calcul de n = 0,050 mol est correct.
-❌ L'erreur : tu as divisé par 500 alors que le volume doit être en litres.
-💡 La bonne méthode : convertis toujours les mL en L avant C = n/V (500 mL = 0,500 L).
-➡️ À toi : on dissout 0,80 g de NaOH pour obtenir 250 mL de solution. Calcule C puis le pH.
-📚 Source : exercice JNG-PC-01 — corrigé Jàng (en attente de validation par un professeur)
+―――――――――
+📘 JÀNG — TA CORRECTION
+Chimie · Solutions et pH des bases fortes
+―――――――――
+✅ CE QUI EST JUSTE
+Ton calcul de n = 2,0/40 = 0,050 mol est correct.
+―――――――――
+❌ TA PREMIÈRE ERREUR
+Tu as divisé par 500 : le volume doit être en litres, pas en mL.
+―――――――――
+💡 LA MÉTHODE
+Convertis toujours avant C = n/V : 500 mL = 0,500 L. Refais ton calcul.
+―――――――――
+➡️ À TOI
+On dissout 0,80 g de NaOH pour obtenir 250 mL de solution. Calcule C puis le pH.
+―――――――――
+⚠️ Jàng peut se tromper : en cas de doute, demande à un professeur.
 ```
 
-## Question 2 — rappel de cours (« pas vu en classe »)
+## Question 2 — exercice juste
 
-**Élève :** `Je n'ai jamais vu l'effet photoélectrique en classe`
+**Élève :** `JNG-PC-02 : pH = 2 puis pH = 3 après dilution`
 
 ```
-📘 Effet photoélectrique en 5 lignes :
-• La lumière est faite de photons d'énergie E = h·c/λ.
-• Un électron sort seulement si E ≥ W0 (travail d'extraction), donc si λ ≤ λ0 = h·c/W0.
-• Énergie cinétique maximale : Ec max = E − W0.
-• 1 eV = 1,6×10⁻¹⁹ J — convertis avant de soustraire.
-➡️ Essaie l'exercice JNG-PC-12 (cellule au césium, λ = 500 nm).
+―――――――――
+📘 JÀNG — TA CORRECTION
+Chimie · Acides forts
+―――――――――
+✅ CE QUI EST JUSTE
+pH = −log C = 2,0, puis 3,0 après dilution par 10.
+―――――――――
+❌ TA PREMIÈRE ERREUR
+Aucune erreur, bravo 👏 Résultat : pH = 2,0 puis 3,0.
+―――――――――
+➡️ À TOI
+Calcule le pH d'une solution d'acide nitrique à 5,0×10⁻³ mol/L.
+―――――――――
+⚠️ Jàng peut se tromper : en cas de doute, demande à un professeur.
 ```
 
 ## Question 3 — hors base
@@ -39,12 +59,13 @@
 **Élève :** `Quelle est la météo demain à Dakar ?`
 
 ```
-Je ne dispose pas de cette information dans ma base. Jàng couvre pour l'instant la Physique-Chimie de Terminale S2 : envoie l'ID d'un exercice (ex. JNG-PC-01) suivi de ta réponse.
+INSUFFISANT : la question ne relève pas du programme de Terminale S.
 ```
+*(sortie `message_erreur` du workflow — dans le MVP, affichée sous la forme « Je ne peux pas corriger ce message : la question ne relève pas du programme de Terminale S. »)*
 
 ## Checklist Plan B
 
 - [ ] Ce fichier ouvert dans un onglet avant la démo
-- [ ] Captures des vrais tests T1, T5, T6 (dossier `05-test/captures/`) — à faire après le montage Dify
+- [ ] Captures des vrais tests T1, T4, T6 (dossier `05-test/captures/`) — à faire après le montage Dify
 - [ ] Schéma `docs/architecture-v2.png` sur un 2e écran ou imprimé
 - [ ] Partage de connexion téléphone prêt si le Wi-Fi de la salle tombe

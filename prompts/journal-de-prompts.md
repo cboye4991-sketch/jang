@@ -245,7 +245,7 @@ Ne donne PAS la solution complète en premier.
 # Séance 5 — RAG & intégration Dify
 
 > Livrable L4 (min. 3 prompts : RAG Knowledge + webhook + test de cohérence).
-> S3 (agents Dify) n'avait pas été fait : les prompts des agents CHERCHEUR / CORRECTEUR sont documentés ici. S4 (MVP) est reporté ; le prompt webhook est prêt mais pas encore exécuté.
+> Le workflow S3 « jang » (Chercheur → SI/SINON → Rédacteur) existait dans Dify ; S5 y ajoute la base RAG. S4 (MVP) est reporté ; le prompt webhook est prêt mais pas encore exécuté.
 > Les notes marquées *[à compléter]* dépendent des tests dans Dify : ne pas les remplir avant d'avoir vu le résultat.
 
 ## S5-1 — Préparer les documents de la base RAG (prompt S1 de la bibliothèque)
@@ -271,25 +271,21 @@ aucune donnée personnelle.
 
 **Résultat :** [`dify/knowledge/jang_exercices_pc_ts2.csv`](../dify/knowledge/jang_exercices_pc_ts2.csv) (14 exercices) et [`jang_fiches_cours_pc_ts2.md`](../dify/knowledge/jang_fiches_cours_pc_ts2.md) / `.pdf` (14 fiches + périmètre).
 
-**Critique : 4/5.** Structure directement indexable, une colonne « erreur fréquente » utile au CORRECTEUR. Tous les résultats ont été **recalculés à part** (script Python) avant d'être gardés : c'est indispensable, un corrigé faux dans la base rendrait toutes les corrections fausses. −1 : ce ne sont pas des annales officielles, et aucun professeur ne les a encore relues → colonne `Statut_validation = À faire valider`.
+**Critique : 4/5.** Structure directement indexable, une colonne « erreur fréquente » utile au Chercheur. Tous les résultats ont été **recalculés à part** (script Python) avant d'être gardés : c'est indispensable, un corrigé faux dans la base rendrait toutes les corrections fausses. −1 : ce ne sont pas des annales officielles, et aucun professeur ne les a encore relues → colonne `Statut_validation = À faire valider`.
 
-**Itération :** passer la longueur de morceau de 300 (tutoriel) à 500 pour le CSV, car une ligne (énoncé + corrigé) dépasse 300 tokens ; garder 300 pour les fiches.
-
----
-
-## S5-2 — Prompts système des agents CHERCHEUR et CORRECTEUR (S3 rattrapé)
-
-- **Outil :** Dify (workflow `Jang_Correcteur_v1`) · **Technique :** Rôle + règles + `{{#context#}}` + format de sortie strict ; séparation des tâches entre deux agents
-
-**Prompts :** texte complet dans [`dify/prompts-agents.md`](../dify/prompts-agents.md).
-
-**Pourquoi deux agents :** le CHERCHEUR (température 0) ne fait que retrouver et recopier le corrigé de référence depuis la base ; le CORRECTEUR ne voit que cette fiche. Un seul agent aurait tendance à résoudre l'exercice lui-même au lieu de s'appuyer sur la base, ce qui annulerait la promesse de fiabilité du VPC (P7).
-
-**Garde-fous écrits dans les prompts :** intention CORRECTION / COURS / HORS_BASE ; phrase fixe pour le hors-base ; jamais la solution complète ; 6 lignes maximum ; source citée.
-
-**Résultat et note :** *[à compléter après les tests T1–T7 du [plan de tests](../dify/tests-rag.md)]*
+**Itération (testée dans Dify) :** à 500 tokens, chaque exercice était coupé en 3 morceaux ; à 1000, 10 exercices sur 14 restaient coupés en deux, l'ID séparé du corrigé. À 2000, on obtient 14 morceaux, 1 par exercice. Fiches importées en Markdown (17 morceaux, un par chapitre).
 
 ---
+
+## S5-2 — Branchement RAG dans le Chercheur S3
+
+- **Outil :** Dify (workflow `jang`) · **Technique :** injection de contexte `{{#context#}}` + règles prioritaires ajoutées à un prompt existant
+
+**Prompt ajouté :** bloc « BASE DE CONNAISSANCES JÀNG + RÈGLES RAG », texte complet dans [`dify/prompts-agents.md`](../dify/prompts-agents.md#ce-qui-a-été-ajouté-au-prompt-system-du-chercheur-s5).
+
+**Pourquoi :** en S3, le Chercheur refaisait lui-même la résolution de référence : une erreur du modèle devenait une correction fausse (Chapeau Noir R1). Avec le RAG, quand l'exercice est dans la base, la référence est **recopiée** depuis un corrigé vérifié ; le SI/SINON et le Rédacteur de S3 ne changent pas. Nouvelles règles : l'élève peut n'envoyer que l'ID de l'exercice ; « pas vu en classe » renvoie à la fiche de cours ; un exercice hors base est signalé comme non vérifié.
+
+**Résultat et note :** *[à compléter après les tests T1–T8 — bloqué : crédits d'essai Dify épuisés, bascule sur Gemini en cours]*
 
 ## S5-3 — Prompt webhook MVP ↔ Dify (prompt E3 adapté)
 
@@ -297,7 +293,7 @@ aucune donnée personnelle.
 
 **Prompt :** [`dify/webhook/prompt-lovable.md`](../dify/webhook/prompt-lovable.md).
 
-**Adaptations par rapport au modèle GreenSprint :** interface qui imite WhatsApp (notre canal cible) ; `inputs.query` et lecture de `data.outputs.answer` (API workflow, pas chatflow) ; timeout 15 s car deux appels LLM à la suite ; aucune image ni vidéo (contrainte data).
+**Adaptations par rapport au modèle GreenSprint :** interface qui imite WhatsApp (notre canal cible) ; `inputs.query` et lecture de `data.outputs.text` / `data.outputs.message_erreur` (API workflow, deux sorties) ; timeout 15 s car deux appels LLM à la suite ; aucune image ni vidéo (contrainte data).
 
 **Résultat :** *[pas encore exécuté — S4 reporté]*. En attendant, l'API est testée sans interface avec [`dify/webhook/test-api.sh`](../dify/webhook/test-api.sh).
 
@@ -307,11 +303,9 @@ aucune donnée personnelle.
 
 - **Outil :** Dify → Test de récupération · **Technique :** Zero-Shot, 5 requêtes (directes, indirectes, hors-base)
 
-**Requêtes :** R1 à R5 du [plan de tests](../dify/tests-rag.md#a-test-de-récupération-dify--connaissances--jang_kb_v1--test-de-récupération).
+**Résultat (28/09) :** R1–R4 ✅ en recherche sémantique : le bon exercice ou la bonne fiche arrive en 1re position (scores 0,45 à 0,68). R5 (hors base) non testé, crédits épuisés. Détail : [plan de tests](../dify/tests-rag.md).
 
-**Résultat et note :** *[à compléter — chunks remontés, scores, captures]*
-
-**Point d'attention prévu :** en mode Économique (index inversé, plan gratuit), R3 et R4 formulées avec d'autres mots que ceux de la base risquent de ne rien remonter. Si c'est le cas, le noter ici comme limite et demander aux élèves de donner l'ID de l'exercice.
+**Note : 4/5.** La recherche sémantique retrouve même les requêtes indirectes (« je n'ai pas vu le condensateur » → Dipôle RC). −1 : en mode Économique (plan gratuit), `satellite altitude vitesse` renvoie l'exercice du proton : l'index par mots-clés ne comprend pas notre français. **Itération :** passer la base en Haute qualité avec l'embedding Gemini (gratuit) ; seuil de score désactivé, car 0,5 aurait écarté R3.
 
 ---
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Jàng — test de l'API Dify sans MVP (S5)
+# Workflow « jang » : la correction sort dans outputs.text, un refus (INSUFFISANT) dans outputs.message_erreur
 # Usage :
-#   export DIFY_API_KEY="app-xxxxxxxx"      # clé du workflow Jang_Correcteur_v1 — ne jamais la committer
+#   export DIFY_API_KEY="app-xxxxxxxx"      # clé API du workflow « jang » — ne jamais la committer
 #   bash dify/webhook/test-api.sh                  # lance T1
 #   bash dify/webhook/test-api.sh "JNG-PC-07 : a = g cos 30 = 8,5 m/s²"
 set -euo pipefail
@@ -35,6 +36,7 @@ except ValueError:
 d = r.get("data", {})
 if d.get("status") != "succeeded":
     print("ÉCHEC :", json.dumps(r, ensure_ascii=False, indent=2)); sys.exit(1)
-print(d["outputs"].get("answer", d["outputs"]))
+o = d.get("outputs") or {}
+print(o.get("text") or o.get("message_erreur") or o)
 print("\n— durée : %.1f s · tokens : %s" % (d.get("elapsed_time", 0), d.get("total_tokens")))
 '

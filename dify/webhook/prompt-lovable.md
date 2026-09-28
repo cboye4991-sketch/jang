@@ -9,9 +9,9 @@
 | Élément | Valeur |
 |---|---|
 | URL API (identique pour tous) | `https://api.dify.ai/v1/workflows/run` |
-| Workflow | `Jang_Correcteur_v1` |
+| Workflow | `jang` |
 | Variable d'entrée | `query` |
-| Chemin de la réponse | `data.outputs.answer` |
+| Chemin de la réponse | `data.outputs.text` (correction) · `data.outputs.message_erreur` (refus) |
 | Clé API | `app-…` — **à ne jamais committer sur GitHub** |
 
 ## Prompt à coller dans Lovable
@@ -43,8 +43,11 @@ Body JSON :
     "user": "jang-" + Date.now() }
 
 TRAITEMENT DE LA RÉPONSE :
-- Succès : afficher response.data.outputs.answer dans une bulle Jàng,
+- Succès : afficher response.data.outputs.text dans une bulle Jàng,
   en conservant les retours à la ligne et les emojis ✅ ❌ 💡 ➡️
+- Si outputs.text est vide et outputs.message_erreur existe : afficher dans une bulle
+  « Je ne peux pas corriger ce message : » suivi de message_erreur
+  sans le mot INSUFFISANT
 - Erreur réseau : "Jàng est indisponible pour le moment — réessaie dans une minute"
 - Timeout (>15 s) : "La réponse prend trop de temps — réessaie"
 
@@ -55,7 +58,7 @@ aucune image lourde ni vidéo (nos utilisateurs ont peu de data).
 ## Pourquoi ces choix
 
 - **Interface WhatsApp :** la cible finale de Jàng est WhatsApp (VPC, G4). Le MVP web sert de démonstrateur en attendant un vrai numéro WhatsApp Business.
-- **Timeout à 15 s** au lieu de 10 s : deux appels LLM à la suite (CHERCHEUR puis CORRECTEUR).
+- **Timeout à 15 s** au lieu de 10 s : deux appels LLM à la suite (Chercheur puis Rédacteur).
 - **Clé API côté navigateur :** acceptable pour un prototype de cours, pas en production. Pour la version finale, passer par une fonction serveur (Lovable Cloud / Supabase Edge Function) — point repris dans la [note d'éthique](../../docs/note-ethique-rag.md).
 
 ## Vérifications après intégration
@@ -64,4 +67,4 @@ aucune image lourde ni vidéo (nos utilisateurs ont peu de data).
 - [ ] T1 du [plan de tests](../tests-rag.md) affiche la correction dans une bulle
 - [ ] T6 (météo) affiche le message hors-base
 - [ ] Aucune erreur dans la console (F12)
-- [ ] Réponse vide ? essayer `response.data.outputs.answer` puis `response.data.outputs` (voir le JSON dans la console)
+- [ ] Réponse vide ? regarder `response.data.outputs` dans la console (F12) : `text` ou `message_erreur`
