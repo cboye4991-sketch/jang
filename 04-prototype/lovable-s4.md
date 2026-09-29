@@ -198,9 +198,14 @@ Continue la refonte « cahier corrigé » :
 3. Cartes Exercices : fond blanc réglé comme une fiche (lignes horizontales discrètes), identifiant en IBM Plex Mono
    dans la couleur de la matière, chapitre en petites capitales colorées, pastille de statut arrondie ;
    elles se soulèvent légèrement au survol. Filtres en pastilles : l'actif en encre foncée.
-4. Encart professeurs sur fond encre #10231E : « Vu et corrigé » en Caveat rouge, titre « Professeur de PC ? Relisez
+4. Fenêtre « Corrige mon exercice » (page Exercices, au-dessus des filtres) : garde-la au même endroit et garde
+   sa logique, change seulement son style : en-tête vert #0E7565 « Corrige mon exercice · Jàng en ligne »,
+   fond #ECE5DD, zone de saisie en IBM Plex Mono sur fond papier, bouton vert « Envoyer à Jàng »,
+   largeur maximale 720px. Dans les réponses de Jàng, colore les titres de rubrique (CE QUI EST JUSTE vert,
+   TA PREMIÈRE ERREUR rouge #D2382A, LA MÉTHODE orange, À TOI bleu).
+5. Encart professeurs sur fond encre #10231E : « Vu et corrigé » en Caveat rouge, titre « Professeur de PC ? Relisez
    nos corrigés. », bouton clair « Proposer mon aide » vers Contact.
-5. Animations légères en CSS : apparition en fondu des sections au défilement (visibles par défaut si le JS
+6. Animations légères en CSS : apparition en fondu des sections au défilement (visibles par défaut si le JS
    ne tourne pas), bulles du chat qui glissent depuis le bas. Respecte prefers-reduced-motion.
 Ne change pas la logique du chat ni la fonction serveur « corriger ».
 ```

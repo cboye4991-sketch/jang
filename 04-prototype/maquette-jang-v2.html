@@ -157,6 +157,16 @@ h2{font:800 clamp(28px,4.5vw,40px)/1.1 var(--display);letter-spacing:-.02em;marg
 footer{padding-block:32px 48px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 footer .mono{font:500 12px var(--mono)}
 .stamp{font:600 20px var(--hand);color:var(--pen)}
+
+/* Fenêtre de correction (page Exercices) */
+.corrector{display:grid;gap:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--chat-bg);margin:0 0 26px;max-width:720px}
+.corrector .bar{border-radius:0}
+.corrector .chat{min-height:0;padding:16px 14px}
+.corrector form{display:flex;gap:8px;padding:10px;background:var(--card);border-top:1px solid var(--line);flex-wrap:wrap}
+.corrector textarea{flex:1 1 220px;min-width:0;resize:vertical;min-height:48px;font:500 15px/1.4 var(--mono);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.corrector textarea:focus{border-color:var(--green);outline:none}
+.corrector .send{flex:0 0 auto;font:700 16px var(--body);padding:12px 18px;border-radius:12px;border:0;background:var(--green);color:var(--green-ink);cursor:pointer}
+.mock-note{font:600 18px/1.2 var(--hand);color:var(--pen)}
 </style>
 
 <header class="nav">
@@ -233,7 +243,18 @@ footer .mono{font:500 12px var(--mono)}
 
   <section id="exercices" aria-labelledby="t-ex">
     <h2 id="t-ex">Exercices type Bac</h2>
-    <p class="sub">14 exercices de Terminale S2, chacun avec un corrigé de référence. Les corrigés sont en cours de validation par des professeurs.</p>
+    <p class="sub">Écris ta réponse dans la conversation ci-dessous, ou copie l'identifiant d'une fiche. Les corrigés sont en cours de validation par des professeurs.</p>
+    <div class="corrector" aria-label="Corrige mon exercice">
+      <div class="bar"><span class="avatar">J</span><div><b>Corrige mon exercice</b><span>Jàng · en ligne</span></div></div>
+      <div class="chat" id="thread">
+        <div class="msg bot">Salut ! Envoie l'identifiant d'un exercice suivi de ta réponse. Exemple : <code style="font:500 13px var(--mono)">JNG-PC-07 : a = 8,5 m/s²</code></div>
+      </div>
+      <form id="ask">
+        <label for="answer" class="sr" style="position:absolute;left:-9999px">Ta réponse</label>
+        <textarea id="answer" placeholder="JNG-PC-01 : ta réponse…">JNG-PC-07 : a = g cos 30 = 8,5 m/s²</textarea>
+        <button class="send" type="submit">Envoyer à Jàng</button>
+      </form>
+    </div>
     <div class="filters" role="group" aria-label="Filtrer par matière">
       <button class="chip" type="button" aria-pressed="true" data-f="tous">Tous</button>
       <button class="chip" type="button" aria-pressed="false" data-f="chimie">Chimie</button>
@@ -284,5 +305,14 @@ footer .mono{font:500 12px var(--mono)}
     var done=function(){b.textContent='ID copié ✓';setTimeout(function(){b.textContent="Copier l'ID"},1600)};
     try{navigator.clipboard.writeText(id).then(done,done)}catch(e){done()}
   })});
+
+  var ask=document.getElementById('ask'),thread=document.getElementById('thread'),ans=document.getElementById('answer');
+  ask.addEventListener('submit',function(e){e.preventDefault();var t=ans.value.trim();if(!t)return;
+    var m=document.createElement('div');m.className='msg me s1';m.textContent=t;thread.appendChild(m);ans.value='';
+    var r=document.createElement('div');r.className='msg bot';
+    r.innerHTML='<span class="mock-note">Maquette : ici, la correction arrive de Dify.</span> Sur le vrai site, ce message part vers le workflow Jàng et la réponse s\'affiche en 5 à 30 secondes.';
+    setTimeout(function(){thread.appendChild(r)},600);});
+  document.querySelectorAll('.ex button:not([disabled])').forEach(function(b){b.addEventListener('click',function(){
+    ans.value=b.closest('.ex').querySelector('.id').textContent+' : ';ans.focus();})});
 })();
 </script>
