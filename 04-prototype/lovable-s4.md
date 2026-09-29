@@ -152,6 +152,59 @@ Traitement de la réponse :
 - 28/09 : le site a été publié **par erreur** sur `jang-bac-helper.lovable.app` (clic sur Publish pendant l'itération P2), puis **dépublié le 29/09 à la demande de l'équipe** en attendant la version finale.
 - À faire : republier après P5 → noter l'URL dans e-Academy.
 
+## Design v2 — « le cahier corrigé » (à appliquer quand les crédits reviennent)
+
+Maquette de référence : [`maquette-jang-v2.html`](maquette-jang-v2.html) (aussi publiée comme page Claude pour la relecture).
+Idée : le site ressemble à une page de **cahier à carreaux corrigée au stylo rouge**, où arrive la conversation WhatsApp avec Jàng. Le rouge est réservé aux corrections (comme sur une copie) ; le vert reste la couleur de la marque.
+
+Deux prompts groupés pour tenir dans les 5 crédits du jour (les itérations visuelles coûtent cher). Envoyer le premier, vérifier l'aperçu, puis le second.
+
+### D1 — Identité et hero
+
+```
+Refais l'identité visuelle du site sans toucher aux textes des pages Exercices et Contact, ni à la logique du chat :
+- Fond de page : papier à carreaux discret (carreaux de 24px, lignes #DCE8E4 sur #F6F9F8), en CSS uniquement.
+- Couleurs : vert marque #0E7565, encre #10231E, texte secondaire #52665F, rouge correction #D2382A
+  (le rouge sert UNIQUEMENT aux annotations de correction), bulle élève #DCF8C6, fond de chat #ECE5DD.
+  Couleurs de matière : Chimie #7C4DDB, Physique #0B84C6, Maths #C77700.
+- Polices Google Fonts, 2 graisses maximum chacune : titres « Schibsted Grotesk » 800, texte « Atkinson Hyperlegible »
+  400/700 (très lisible sur petit écran), identifiants et formules « IBM Plex Mono » 500, annotations manuscrites « Caveat » 600.
+- Logo : « Jàng » en Schibsted Grotesk 800, suivi du mot « apprendre » en Caveat rouge (masqué sous 480px).
+- Hero de l'Accueil : titre « Tu révises seul ? Jàng te montre où tu t'es trompé. » avec le mot « trompé. » souligné
+  d'un trait de stylo rouge dessiné en SVG. Au-dessus, un petit sur-titre en IBM Plex Mono majuscules :
+  « BAC · TERMINALE S2 · PHYSIQUE-CHIMIE ». Sous les boutons, la bannière des 3 promesses devient une ligne discrète
+  en IBM Plex Mono : « ✓ moins de 100 Ko par correction ✓ rien à installer ✓ gratuit pour l'élève ».
+- Remplace l'illustration de l'élève par un téléphone (cadre sombre arrondi) qui montre une conversation Jàng :
+  bulle élève « JNG-PC-01 : n = 2/40 = 0,05 mol ; C = 0,05/500 = 0,0001 mol/L » où « 0,05/500 » est entouré au stylo rouge
+  (ellipse SVG) avec l'annotation « en litres ! » en Caveat rouge ; puis la bulle Jàng avec 4 rubriques colorées
+  (CE QUI EST JUSTE en vert, TA PREMIÈRE ERREUR en rouge, LA MÉTHODE en orange, À TOI en bleu).
+  Au chargement, la scène se joue une fois : bulle élève, « Jàng écrit… », ellipse rouge qui se dessine, réponse.
+  Un lien « Rejouer la démo » sous le téléphone. Tout reste visible au repos ; respecte prefers-reduced-motion.
+Deux colonnes au-delà de 880px (texte à gauche, téléphone à droite), une seule colonne sur mobile.
+```
+
+### D2 — Sections, cartes et animations
+
+```
+Continue la refonte « cahier corrigé » :
+1. Accueil : ajoute après le hero une section « Les annales, tu les as déjà. Ce qui manque, c'est la correction. »
+   avec deux fiches côte à côte : « PDF d'annales du groupe WhatsApp » (✗ rouge : personne ne te dit si ta réponse
+   est juste ; le corrigé donne tout sans expliquer ; tu recopies sans comprendre) et « Avec Jàng », bordure verte
+   (✓ : ta réponse est comparée à un corrigé de référence ; seule ta première erreur est expliquée ; un exercice
+   similaire pour vérifier).
+2. « Comment ça marche » : 3 étapes numérotées en grands chiffres verts, séparées par des filets comme des lignes
+   de cahier, avec les exemples « JNG-PC-07 » et « JNG-PC-07 : a = 8,5 m/s² » en IBM Plex Mono sur fond vert clair.
+   Retire la section des 3 chiffres (déjà dite dans les promesses).
+3. Cartes Exercices : fond blanc réglé comme une fiche (lignes horizontales discrètes), identifiant en IBM Plex Mono
+   dans la couleur de la matière, chapitre en petites capitales colorées, pastille de statut arrondie ;
+   elles se soulèvent légèrement au survol. Filtres en pastilles : l'actif en encre foncée.
+4. Encart professeurs sur fond encre #10231E : « Vu et corrigé » en Caveat rouge, titre « Professeur de PC ? Relisez
+   nos corrigés. », bouton clair « Proposer mon aide » vers Contact.
+5. Animations légères en CSS : apparition en fondu des sections au défilement (visibles par défaut si le JS
+   ne tourne pas), bulles du chat qui glissent depuis le bas. Respecte prefers-reduced-motion.
+Ne change pas la logique du chat ni la fonction serveur « corriger ».
+```
+
 ## Captures (L4)
 
 | Capture | Fichier |

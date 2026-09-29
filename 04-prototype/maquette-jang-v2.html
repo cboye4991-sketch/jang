@@ -1,0 +1,288 @@
+<title>Jàng — maquette v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Caveat:wght@600&family=IBM+Plex+Mono:wght@500&family=Schibsted+Grotesk:wght@700;800&display=swap">
+<style>
+/* Concept : « le cahier corrigé » — une page de cahier à carreaux, annotée au stylo rouge du professeur,
+   où arrive la conversation WhatsApp avec Jàng. Mobile d'abord, une colonne ; deux colonnes au-delà de 880px. */
+:root{
+  --paper:#F6F9F8;      /* papier du cahier, blanc légèrement vert */
+  --grid:#DCE8E4;       /* carreaux */
+  --ink:#10231E;        /* encre */
+  --muted:#52665F;
+  --green:#0E7565;      /* marque, dérivé du vert WhatsApp foncé */
+  --green-ink:#FFFFFF;
+  --bubble:#DCF8C6;     /* bulle élève WhatsApp */
+  --chat-bg:#ECE5DD;    /* fond de conversation WhatsApp */
+  --card:#FFFFFF;
+  --line:#C9D8D3;
+  --pen:#D2382A;        /* stylo rouge du correcteur — accent unique */
+  --chimie:#7C4DDB; --physique:#0B84C6; --maths:#C77700;
+  --display:"Schibsted Grotesk", "Arial Narrow", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --hand:"Caveat", "Comic Sans MS", cursive;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0D1513;--grid:#18241F;--ink:#E4EEEA;--muted:#9DB2AA;--green:#35C2A1;--green-ink:#06231C;
+  --bubble:#1E4B3C;--chat-bg:#17201D;--card:#131D1A;--line:#27352F;--pen:#FF6A5A;
+  --chimie:#A98BF0;--physique:#4DB6EE;--maths:#F2A93B;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0D1513;--grid:#18241F;--ink:#E4EEEA;--muted:#9DB2AA;--green:#35C2A1;--green-ink:#06231C;
+  --bubble:#1E4B3C;--chat-bg:#17201D;--card:#131D1A;--line:#27352F;--pen:#FF6A5A;
+  --chimie:#A98BF0;--physique:#4DB6EE;--maths:#F2A93B;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:17px/1.55 var(--body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;padding-inline:16px}
+.wrap{max-width:1080px;margin-inline:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--pen);outline-offset:2px;border-radius:6px}
+
+/* Barre de navigation */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin-inline:-16px;padding:10px 16px;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;justify-content:space-between}
+.logo{display:flex;align-items:baseline;gap:8px;font:800 26px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo small{font:600 18px/1 var(--hand);color:var(--pen);letter-spacing:0}
+.nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;font-weight:700;font-size:15px}
+@media(max-width:480px){.logo small{display:none}.nav li a{padding:7px 9px!important;font-size:14px}}
+.nav li a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none}
+.nav li a[aria-current]{background:var(--green);color:var(--green-ink)}
+
+/* Hero */
+.hero{display:grid;gap:32px;padding-block:40px 24px;align-items:center}
+@media(min-width:880px){.hero{grid-template-columns:1.05fr .95fr;padding-block:64px 40px}}
+.eyebrow{font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(38px,7vw,64px)/1.02 var(--display);letter-spacing:-.03em;margin:14px 0 18px;text-wrap:balance}
+h1 .mark{position:relative;white-space:nowrap}
+h1 .mark svg{position:absolute;left:-4%;bottom:-10px;width:108%;height:22px;overflow:visible}
+.lead{font-size:19px;color:var(--muted);max-width:34ch;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font:700 17px/1 var(--body);padding:16px 22px;border-radius:12px;border:2px solid var(--green);text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--green);color:var(--green-ink)}
+.btn.ghost{background:transparent;color:var(--green)}
+.promise{display:flex;flex-wrap:wrap;gap:8px 18px;margin:26px 0 0;padding:0;list-style:none;font:500 13px/1.3 var(--mono);color:var(--muted)}
+.promise li::before{content:"✓ ";color:var(--green)}
+
+/* Téléphone de démonstration */
+.demo{justify-self:center;width:min(100%,360px)}
+.phone{width:min(100%,360px);border-radius:34px;padding:10px;background:var(--ink);box-shadow:0 30px 60px -30px rgba(10,40,30,.45)}
+.screen{border-radius:26px;overflow:hidden;background:var(--chat-bg)}
+.bar{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--green);color:var(--green-ink)}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font:800 16px var(--display);color:var(--green)}
+.bar b{display:block;font-size:15px}.bar span{font-size:12px;opacity:.85}
+.chat{display:flex;flex-direction:column;gap:8px;padding:14px 12px 16px;min-height:360px;font-size:14.5px;line-height:1.45}
+.msg{max-width:88%;padding:8px 11px;border-radius:10px;box-shadow:0 1px 0 rgba(0,0,0,.08);position:relative}
+.me{align-self:flex-end;background:var(--bubble);border-top-right-radius:2px}
+.bot{align-self:flex-start;background:var(--card);border-top-left-radius:2px}
+.msg time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.me code{font:500 13.5px var(--mono);white-space:nowrap}
+.circled{position:relative;display:inline-block}
+.me .circled svg{position:absolute;inset:-9px -10px;width:calc(100% + 20px);height:calc(100% + 18px);overflow:visible;pointer-events:none}
+.note{position:absolute;right:-4px;top:-26px;white-space:nowrap;font:600 22px/1 var(--hand);color:var(--pen);transform:rotate(-6deg)}
+.bot .row{display:block}
+.bot .k{font:700 12px/1.2 var(--mono);letter-spacing:.05em;text-transform:uppercase;display:block;margin-top:6px}
+.k.ok{color:var(--green)} .k.err{color:var(--pen)} .k.tip{color:var(--maths)} .k.go{color:var(--physique)}
+.typing{align-self:flex-start;background:var(--card);border-radius:10px;padding:10px 12px;display:none;gap:4px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.replay{margin:14px auto 0;display:block;font:700 14px var(--body);background:none;border:0;color:var(--green);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+/* séquence rejouée à la demande ; au repos, tout est visible */
+.play .s1{animation:pop .4s both}.play .s2{animation:pop .4s 1.6s both}
+.play .typing{display:flex;animation:typ 1.3s .5s both}
+.play .draw path{stroke-dasharray:260;animation:draw .8s 2.3s both}
+.play .note{animation:pop .3s 3s both}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes typ{0%{opacity:0}10%,90%{opacity:1}100%{opacity:0;display:none}}
+@keyframes draw{from{stroke-dashoffset:260}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.play *{animation:none!important}}
+
+/* Sections */
+section{padding-block:40px}
+h2{font:800 clamp(28px,4.5vw,40px)/1.1 var(--display);letter-spacing:-.02em;margin:0 0 8px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 26px;max-width:60ch}
+
+/* Avant / avec Jàng — contenu du VPC */
+.compare{display:grid;gap:14px}
+@media(min-width:720px){.compare{grid-template-columns:1fr 1fr}}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.sheet h3{font:800 20px/1.2 var(--display);margin:0 0 12px}
+.sheet ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.sheet li{display:grid;grid-template-columns:22px 1fr;gap:8px}
+.sheet.before li::before{content:"✗";color:var(--pen);font-weight:700}
+.sheet.after{border:2px solid var(--green)}
+.sheet.after li::before{content:"✓";color:var(--green);font-weight:700}
+
+/* Étapes : une vraie séquence, donc numérotées */
+.steps{display:grid;gap:0;counter-reset:s;border-top:2px solid var(--ink)}
+.step{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+.step::before{counter-increment:s;content:counter(s);font:800 40px/1 var(--display);color:var(--green)}
+.step h3{font:800 20px/1.25 var(--display);margin:4px 0 4px}
+.step p{margin:0;color:var(--muted)}
+.step code{font:500 15px var(--mono);background:var(--bubble);padding:1px 6px;border-radius:5px;color:var(--ink)}
+@media(min-width:880px){.steps{grid-template-columns:repeat(3,1fr);gap:28px;border-top:0}
+  .step{grid-template-columns:1fr;border-bottom:0;border-top:2px solid var(--ink);padding-top:14px}}
+
+/* Fiches d'exercice */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.chip{font:700 14px var(--body);padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cards{display:grid;gap:14px}
+@media(min-width:640px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.cards{grid-template-columns:repeat(3,1fr)}}
+.ex{--c:var(--physique);background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;min-width:0;
+  background-image:repeating-linear-gradient(transparent 0 29px,var(--grid) 29px 30px);background-position:0 12px;transition:transform .2s,box-shadow .2s}
+.ex:hover{transform:translateY(-3px);box-shadow:0 14px 24px -18px rgba(10,40,30,.5)}
+.ex[data-m="chimie"]{--c:var(--chimie)}.ex[data-m="maths"]{--c:var(--maths)}
+.ex .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.id{font:500 15px var(--mono);color:var(--c)}
+.status{font:700 12px/1 var(--body);padding:6px 9px;border-radius:999px;background:color-mix(in srgb,var(--green) 14%,transparent);color:var(--green);white-space:nowrap}
+.status.soon{background:color-mix(in srgb,var(--pen) 12%,transparent);color:var(--pen)}
+.ex .ch{font:700 13px var(--body);color:var(--c);text-transform:uppercase;letter-spacing:.05em}
+.ex p{margin:0;font-size:16px}
+.ex button{align-self:flex-start;margin-top:auto;font:700 14px var(--body);padding:9px 14px;border-radius:10px;border:1.5px solid var(--green);background:transparent;color:var(--green);cursor:pointer}
+.ex button[disabled]{border-color:var(--line);color:var(--muted);cursor:not-allowed}
+
+/* Professeurs */
+.prof{display:grid;gap:18px;align-items:center;background:var(--ink);color:var(--paper);border-radius:22px;padding:28px 24px}
+.prof h2{color:var(--paper)}
+.prof p{margin:0;color:color-mix(in srgb,var(--paper) 78%,transparent);max-width:52ch}
+.prof .btn{background:var(--paper);color:var(--ink);border-color:var(--paper);justify-self:start}
+.prof .hand{font:600 26px/1.1 var(--hand);color:var(--pen)}
+@media(min-width:880px){.prof{grid-template-columns:1fr auto;padding:40px}}
+
+footer{padding-block:32px 48px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+footer .mono{font:500 12px var(--mono)}
+.stamp{font:600 20px var(--hand);color:var(--pen)}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#accueil">Jàng <small>apprendre</small></a>
+    <nav aria-label="Navigation"><ul>
+      <li><a href="#accueil" aria-current="page">Accueil</a></li>
+      <li><a href="#exercices">Exercices</a></li>
+      <li><a href="#profs">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main class="wrap" id="accueil">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Bac · Terminale S2 · Physique-Chimie</span>
+      <h1>Tu révises seul ? Jàng te montre où tu t'es <span class="mark">trompé.<svg viewBox="0 0 300 22" aria-hidden="true"><path d="M4 14 C 80 4, 180 20, 296 8" fill="none" stroke="var(--pen)" stroke-width="4" stroke-linecap="round"/></svg></span></h1>
+      <p class="lead">Envoie ta réponse à un exercice du Bac. Jàng repère ta première erreur, t'explique la méthode et te donne un exercice pour vérifier que tu as compris.</p>
+      <div class="cta">
+        <a class="btn primary" href="#exercices">Corriger un exercice</a>
+        <a class="btn ghost" href="#profs">Je suis professeur</a>
+      </div>
+      <ul class="promise">
+        <li>moins de 100 Ko par correction</li><li>rien à installer</li><li>gratuit pour l'élève</li>
+      </ul>
+    </div>
+
+    <div class="demo">
+    <figure class="phone" aria-label="Exemple de correction dans la conversation Jàng" style="margin:0">
+      <div class="screen">
+        <div class="bar"><span class="avatar">J</span><div><b>Jàng</b><span>corrige tes exercices</span></div></div>
+        <div class="chat" id="demo">
+          <div class="msg me s1">JNG-PC-01 : n = 2/40 = 0,05 mol ; C = <span class="circled"><code>0,05/500</code><svg class="draw" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path d="M50 3 C 90 2, 99 20, 90 32 C 75 40, 20 40, 8 30 C -2 20, 10 5, 55 5" fill="none" stroke="var(--pen)" stroke-width="2.4" stroke-linecap="round"/></svg><span class="note">en litres !</span></span> = 0,0001 mol/L<time>21:14 ✓✓</time></div>
+          <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="msg bot s2">
+            <span class="k ok">Ce qui est juste</span><span class="row">n = 0,050 mol : bien calculé.</span>
+            <span class="k err">Ta première erreur</span><span class="row">Tu divises par 500 : le volume doit être en litres.</span>
+            <span class="k tip">La méthode</span><span class="row">500 mL = 0,500 L, puis C = n/V.</span>
+            <span class="k go">À toi</span><span class="row">0,80 g de NaOH dans 250 mL : calcule C puis le pH.</span>
+            <time>21:14</time>
+          </div>
+        </div>
+      </div>
+    </figure>
+    <button class="replay" id="replay" type="button">Rejouer la démo</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-cmp">
+    <h2 id="t-cmp">Les annales, tu les as déjà. Ce qui manque, c'est la correction.</h2>
+    <p class="sub">Ce que les élèves de région utilisent aujourd'hui, comparé à Jàng.</p>
+    <div class="compare">
+      <div class="sheet before"><h3>PDF d'annales du groupe WhatsApp</h3><ul>
+        <li>Personne ne te dit si ta réponse est juste</li>
+        <li>Le corrigé, quand il existe, donne tout sans expliquer</li>
+        <li>Tu recopies sans comprendre</li></ul></div>
+      <div class="sheet after"><h3>Avec Jàng</h3><ul>
+        <li>Ta réponse est comparée à un corrigé de référence</li>
+        <li>Seule ta première erreur est expliquée, pas toute la solution</li>
+        <li>Un exercice similaire pour vérifier que c'est acquis</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-how">
+    <h2 id="t-how">Comment ça marche</h2>
+    <p class="sub">Trois messages, depuis le téléphone que tu as déjà.</p>
+    <div class="steps">
+      <div class="step"><div><h3>Choisis un exercice</h3><p>Note son identifiant, par exemple <code>JNG-PC-07</code>.</p></div></div>
+      <div class="step"><div><h3>Envoie ta réponse</h3><p>Écris-la comme sur ta copie : <code>JNG-PC-07 : a = 8,5 m/s²</code></p></div></div>
+      <div class="step"><div><h3>Corrige-toi</h3><p>Lis ta première erreur, refais le calcul, puis fais l'exercice similaire.</p></div></div>
+    </div>
+  </section>
+
+  <section id="exercices" aria-labelledby="t-ex">
+    <h2 id="t-ex">Exercices type Bac</h2>
+    <p class="sub">14 exercices de Terminale S2, chacun avec un corrigé de référence. Les corrigés sont en cours de validation par des professeurs.</p>
+    <div class="filters" role="group" aria-label="Filtrer par matière">
+      <button class="chip" type="button" aria-pressed="true" data-f="tous">Tous</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="chimie">Chimie</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="physique">Physique</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="maths">Maths</button>
+    </div>
+    <div class="cards" id="cards">
+      <article class="ex" data-m="chimie"><div class="top"><span class="id">JNG-PC-01</span><span class="status">Corrigé disponible</span></div><span class="ch">Chimie · Solutions et pH</span><p>2,0 g de NaOH dans 500 mL : calcule C puis le pH.</p><button type="button">Copier l'ID</button></article>
+      <article class="ex" data-m="chimie"><div class="top"><span class="id">JNG-PC-03</span><span class="status">Corrigé disponible</span></div><span class="ch">Chimie · Acides faibles</span><p>pH d'une solution d'acide éthanoïque à 1,0×10⁻² mol/L (pKa = 4,8).</p><button type="button">Copier l'ID</button></article>
+      <article class="ex" data-m="physique"><div class="top"><span class="id">JNG-PC-07</span><span class="status">Corrigé disponible</span></div><span class="ch">Physique · Lois de Newton</span><p>Solide sur un plan incliné à 30° : accélération et vitesse après 2,0 m.</p><button type="button">Copier l'ID</button></article>
+      <article class="ex" data-m="physique"><div class="top"><span class="id">JNG-PC-10</span><span class="status">Corrigé disponible</span></div><span class="ch">Physique · Dipôle RC</span><p>R = 10 kΩ, C = 100 µF : constante de temps et tension à t = τ.</p><button type="button">Copier l'ID</button></article>
+      <article class="ex" data-m="physique"><div class="top"><span class="id">JNG-PC-12</span><span class="status">Corrigé disponible</span></div><span class="ch">Physique · Effet photoélectrique</span><p>Cellule au césium éclairée à 500 nm : énergie cinétique maximale.</p><button type="button">Copier l'ID</button></article>
+      <article class="ex" data-m="maths"><div class="top"><span class="id">JNG-MA-01</span><span class="status soon">En préparation</span></div><span class="ch">Maths · Suites numériques</span><p>Étudier la convergence d'une suite récurrente.</p><button type="button" disabled>Bientôt disponible</button></article>
+    </div>
+  </section>
+
+  <section id="profs">
+    <div class="prof">
+      <div>
+        <span class="hand">Vu et corrigé</span>
+        <h2>Professeur de PC ? Relisez nos corrigés.</h2>
+        <p>Chaque corrigé de Jàng doit être validé par un professeur avant d'être proposé à de vrais élèves. Une relecture prend environ dix minutes par exercice.</p>
+      </div>
+      <a class="btn" href="#profs">Proposer mon aide</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Projet étudiant GET 409 · Swiss UMEF University, Campus de Dakar</span>
+    <span class="mono">Cheikh BOYE · Adama DIOP · 2026</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var demo=document.getElementById('demo');
+  function play(){demo.classList.remove('play');void demo.offsetWidth;demo.classList.add('play');}
+  document.getElementById('replay').addEventListener('click',play);
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(play,400);}
+  var chips=document.querySelectorAll('.chip');
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});
+    var f=c.dataset.f;
+    document.querySelectorAll('.ex').forEach(function(e){e.hidden=!(f==='tous'||e.dataset.m===f)});
+  })});
+  document.querySelectorAll('.ex button:not([disabled])').forEach(function(b){b.addEventListener('click',function(){
+    var id=b.closest('.ex').querySelector('.id').textContent;
+    var done=function(){b.textContent='ID copié ✓';setTimeout(function(){b.textContent="Copier l'ID"},1600)};
+    try{navigator.clipboard.writeText(id).then(done,done)}catch(e){done()}
+  })});
+})();
+</script>
