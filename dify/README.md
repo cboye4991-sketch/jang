@@ -2,13 +2,14 @@
 
 > **GET 409 · Séance 5 — Intégration & RAG avec Dify**, adaptée à Jàng.
 > **État au 28/09/2026 :** le workflow S3 « jang » existait déjà dans Dify. La base **Jang_KB_v1** a été créée et branchée devant le Chercheur (détail : [`prompts-agents.md`](prompts-agents.md)). La séance 4 (MVP) est reportée volontairement ; le branchement au MVP est prêt dans [`webhook/prompt-lovable.md`](webhook/prompt-lovable.md).
+> ✅ **30/09/2026 : version « S5 RAG v3 »** — RAG à deux recherches : base fixe `Jang_Programme_v1` (programme TS2 + constantes) lue à chaque question, ce qui corrige T8 ([détail](tests-rag.md#b-bis-rag-à-deux-recherches--base-fixe-programme-30092026-version--s5-rag-v3-)).
 > ✅ **Publié le 28/09/2026** (version « S5 RAG v2 ») avec la clé Gemini gratuite : `gemini-3.5-flash-lite` pour les agents, `gemini-embedding-001` pour la base. 7 tests sur 8 validés ([plan de tests](tests-rag.md)).
 
 ## Ce qui tourne dans Dify
 
 ```
-Début ─▶ Récupération Jang_KB_v1 ─▶ Chercheur ─▶ SI/SINON ─┬─▶ Sortie (message_erreur)   si INSUFFISANT
-                                                           └─▶ Rédacteur ─▶ Sortie 2 (text)
+Début ─▶ Récupération Jang_KB_v1 ─▶ RECUP_PROGRAMME ─▶ MODÈLE ─▶ Chercheur ─▶ SI/SINON ─┬─▶ Sortie (message_erreur)   si INSUFFISANT
+                                                                                         └─▶ Rédacteur ─▶ Sortie 2 (text)
 ```
 
 Pour Jàng, le RAG n'est pas un bonus : c'est la **promesse de fiabilité du VPC** (Pain Reliever P7). Au lieu de refaire l'exercice lui-même, le Chercheur reprend le **corrigé de référence** stocké dans la base.
@@ -19,6 +20,7 @@ Pour Jàng, le RAG n'est pas un bonus : c'est la **promesse de fiabilité du VPC
 |---|---|---|---|
 | [`jang_exercices_pc_ts2.csv`](knowledge/jang_exercices_pc_ts2.csv) | 14 exercices type Bac PC Terminale S2 : énoncé, corrigé de référence, résultat, erreur fréquente, exercice similaire + réponse | 2000 → **14 morceaux, 1 par exercice** | 0 |
 | [`jang_fiches_cours_pc_ts2.md`](knowledge/jang_fiches_cours_pc_ts2.md) (version PDF : [`.pdf`](knowledge/jang_fiches_cours_pc_ts2.pdf)) | 14 fiches « pas vu en classe » (5 lignes par chapitre) + ce que Jàng ne couvre pas | 500 → 17 morceaux | 0 |
+| [`jang_programme_constantes_ts2.md`](knowledge/jang_programme_constantes_ts2.md) — **base fixe** `Jang_Programme_v1` | Chapitres du programme PC TS2 + constantes (g, h, c, e, G, Ke…), une seule ligne | séparateur `\n\n`, 1000 → 1 morceau | 0 |
 
 Tous les résultats du CSV ont été recalculés. Les exercices sont **rédigés par l'équipe** sur le modèle du Bac (pas copiés d'annales officielles) et portent le statut « À faire valider par un professeur » — à dire honnêtement en démo et dans la note d'éthique.
 

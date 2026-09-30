@@ -33,7 +33,19 @@ Même série en mode **Économique** (mots-clés, sans crédit) : R2 `satellite 
 | T5 | `Je n'ai jamais vu l'effet photoélectrique en classe` | Probablement `message_erreur` (pas de réponse d'élève à corriger) — à observer et noter | ⚠️→✅ 1er essai : « Aucune erreur, bravo » hors sujet, puis INSUFFISANT. Deux règles ajoutées (Chercheur + Rédacteur) → « 📚 LE COURS EN BREF » sur le dipôle RC + exercice de la base (31 s) |
 | T6 | `Quelle est la météo demain à Dakar ?` | `message_erreur` : « INSUFFISANT : … ne relève pas du programme de Terminale S » | ✅ `message_erreur` : « INSUFFISANT : … ne concerne pas le programme de PC ou de Maths de Terminale S » |
 | T7 | `Corrige mon exercice de SVT sur la génétique` | `message_erreur` (matière non couverte) | ✅ `message_erreur` : « INSUFFISANT : la question concerne les SVT… » (17 s) |
-| T8 | Exercice hors base, énoncé complet + réponse | Correction avec SOURCES « hors base Jàng — résolution non vérifiée par un professeur » | 🟡 Chercheur OK : SOURCES « hors base Jàng — résolution non vérifiée par un professeur » ; le Rédacteur a échoué (Gemini saturé) — à relancer |
+| T8 | Exercice hors base : `Une voiture de masse 1000 kg passe de 0 à 20 m/s en 10 s… Ma réponse : F = m·v = 20 000 N` | Correction avec SOURCES « hors base Jàng — résolution non vérifiée par un professeur » | ❌→✅ En v2, refusé à tort (« niveau collège/seconde »). **Corrigé en v3 par la base fixe programme** (30/09) : a = Δv/Δt = 2,0 m/s², F = m·a = 2 000 N, erreur m·v (quantité de mouvement) repérée (15 s) |
+| T9 | Hors base, constante absente de l'énoncé : `Un photon a une longueur d'onde de 500 nm… Ma réponse : E = h·λ = 3,3×10⁻⁴⁰ J` | Le Chercheur prend c dans la base fixe | ✅ (v3) E = h·c/λ = 3,97×10⁻¹⁹ J avec c = 3,0×10⁸ m/s de la base fixe ; erreur h·λ repérée (7 s) |
+
+## B bis. RAG à deux recherches — base fixe programme (30/09/2026, version « S5 RAG v3 »)
+
+Appliqué d'après le tutoriel *GET 409 — S5 — Tutoriel Dify RAG à deux recherches*, pour corriger T8.
+
+- **Base fixe `Jang_Programme_v1`** : [`knowledge/jang_programme_constantes_ts2.md`](knowledge/jang_programme_constantes_ts2.md), une seule ligne de 850 caractères (chapitres du programme PC TS2 et constantes). Séparateur `\n\n`, longueur 1000 : **1 morceau**. Un premier jet de 1 122 caractères était coupé en 2 morceaux et a été raccourci.
+- **Variable ENV** `requete_programme` = « programme Terminale S2 chapitres constantes » (requête fixe).
+- **RECUP_PROGRAMME** (requête = ENV, Top K 3) → **MODÈLE (base fixe)** (`{% for item in donnees %}{{ item.content }}{% endfor %}`) → bloc « BLOC PROGRAMME » dans le prompt du Chercheur.
+- Trace vérifiée sur T8 : RECUP_PROGRAMME renvoie le morceau, MODÈLE sort le texte brut, le Chercheur classe l'exercice en « Lois de Newton » et ne refuse plus.
+
+Non-régression v3 (30/09) : T1 ✅ (volume en mL, 8 s) · T6 ✅ `message_erreur` météo · T7 ✅ `message_erreur` SVT · T8 ✅ · T9 ✅. La règle « jamais hors niveau » ne fait pas accepter les autres matières.
 
 ## C. Critères de réussite (rappel HMW / VPC)
 

@@ -313,6 +313,23 @@ aucune donnée personnelle.
 
 ---
 
+## S5-5 — RAG à deux recherches : base fixe programme + constantes (tutoriel S5)
+
+- **Date :** 30/09/2026 · **Outil :** Dify (workflow « jang ») · **Technique :** RAG à deux recherches (base recherchée + base fixe lue en entier) ; débogage Chain-of-Thought sur la TRACE
+- **Problème de départ (T8) :** un exercice hors base au programme (voiture, 2e loi de Newton) était refusé : « INSUFFISANT : niveau collège/seconde ». Le Chercheur devinait le programme.
+
+**Débogage (prompt de la section 8 du tutoriel, adapté) :** « Tu es un expert des workflows Dify… Raisonne étape par étape et ne propose AUCUNE modification de prompt tant que les branchements n'ont pas été vérifiés. » avec : chaîne DÉBUT → RECUP_1 → CHERCHEUR, question T8, résultat attendu/obtenu, SORTIES de la TRACE.
+→ Diagnostic : branchements corrects (la récupération renvoie JNG-PC-07, le plus proche) ; la cause est l'absence de référentiel du programme dans le contexte, donc le Chercheur juge le niveau « au jugé ».
+
+**Prompt ajouté au Chercheur :** bloc « BLOC PROGRAMME » + 3 règles (voir [`dify/prompts-agents.md`](../dify/prompts-agents.md#bloc-programme-ajouté-au-chercheur-s5-v3-3009)). Base fixe d'une ligne, requête fixe en variable ENV, nœud MODÈLE Jinja.
+
+**Résultat :** T8 ✅ (F = m·a = 2 000 N, erreur m·v repérée) ; T9 nouveau ✅ (c = 3,0×10⁸ m/s pris dans la base fixe, E = 3,97×10⁻¹⁹ J) ; non-régression T1, T6, T7 ✅. Publié en « S5 RAG v3 ».
+
+**Critique :** 1er jet de la base fixe trop long (1 122 caractères → 2 morceaux) ; raccourci à 850 caractères pour rester en 1 morceau. La règle « jamais hors niveau » pourrait faire accepter trop large : T6 (météo) et T7 (SVT) vérifiés, toujours refusés.
+**Itération :** si le programme officiel change, mettre à jour une seule ligne de la base fixe, sans toucher au prompt.
+
+---
+
 ## Modèle pour les prochaines entrées
 
 ```
