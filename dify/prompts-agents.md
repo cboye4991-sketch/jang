@@ -3,17 +3,19 @@
 > **S3** (fait dans Dify le 23/09/2026) : Début → Chercheur → SI/SINON → Rédacteur.
 > **S5** (28/09/2026) : ajout du nœud **Récupération Jang_KB_v1** avant le Chercheur et injection du contexte dans son prompt.
 > **S5 v3** (30/09/2026) : RAG à deux recherches — base fixe **Jang_Programme_v1** (programme TS2 + constantes) lue à chaque question par **RECUP_PROGRAMME** (requête = variable ENV `requete_programme`) puis **MODÈLE**. Sauvegarde avant ce changement : « jang (backup avant base fixe) ».
+> **S5 v4** (30/09/2026) : nœud Code **EXTRAIRE_ID** avant la récupération (voir [`code-extraire-id.py`](code-extraire-id.py)) et règle « réponse illisible ».
 > Sauvegarde de la version S3 : application **« jang (sauvegarde S3) »** dans le Studio Dify.
 
 ```
-Début (query) ─▶ Récupération Jang_KB_v1 ─▶ RECUP_PROGRAMME (ENV) ─▶ MODÈLE ─▶ Chercheur ─▶ SI/SINON ─┬─ INSUFFISANT ─▶ Sortie  (message_erreur)
+Début (query) ─▶ EXTRAIRE_ID ─▶ Récupération Jang_KB_v1 ─▶ RECUP_PROGRAMME (ENV) ─▶ MODÈLE ─▶ Chercheur ─▶ SI/SINON ─┬─ INSUFFISANT ─▶ Sortie  (message_erreur)
                                                                                                         └─ sinon ───────▶ Rédacteur ─▶ Sortie 2 (text)
 ```
 
 | Nœud | Rôle | Réglages |
 |---|---|---|
 | **Début** | Variable `query` (paragraphe, obligatoire) — « Ton exercice et ta réponse » | |
-| **Récupération Jang_KB_v1** *(S5)* | Cherche l'exercice et son corrigé de référence dans la base | Requête = `Début · query` · Top K = 3 |
+| **EXTRAIRE_ID** *(S5 v4, Code Python)* | Repère l'ID `JNG-PC-xx` et remplace la requête par l'énoncé de référence de l'exercice | Entrée `Début · query` · sorties `requete_recherche`, `id_exercice` |
+| **Récupération Jang_KB_v1** *(S5)* | Cherche l'exercice et son corrigé de référence dans la base | Requête = `EXTRAIRE_ID · requete_recherche` (v4) · Top K = 3 |
 | **RECUP_PROGRAMME** *(S5 v3)* | Lit toujours la base fixe Jang_Programme_v1 (1 morceau) | Requête = `ENV · requete_programme` · Top K = 3 |
 | **MODÈLE (base fixe)** *(S5 v3)* | Transforme le résultat en texte simple | Variable `donnees` = `RECUP_PROGRAMME · result` · Jinja `{% for item in donnees %}{{ item.content }}{% endfor %}` |
 | **Chercheur** (LLM) | Analyse la réponse, établit la résolution de référence, repère la première erreur | Contexte = `Récupération · result` · format de sortie strict (MATIÈRE / EXERCICE / RÉPONSE DE RÉFÉRENCE / PREMIÈRE ERREUR / NOTION / EXERCICE SIMILAIRE / SOURCES) ou `INSUFFISANT : …` |
@@ -70,6 +72,26 @@ RÈGLES BLOC PROGRAMME :
 
 Raison : au test T8 (voiture, 2e loi de Newton, hors base), le Chercheur jugeait l'exercice « niveau collège/seconde » et répondait INSUFFISANT. Il devinait le programme ; il le lit maintenant.
 
+## Changements S5 v4 dans le Chercheur (30/09)
+
+Condition de l'étape 3 réécrite :
+
+```
+- l'exercice relève du programme de Terminale S, c'est-à-dire d'un chapitre listé dans le BLOC
+  PROGRAMME ci-dessous (un exercice simple ou « élémentaire » d'un de ces chapitres, par exemple
+  a = Δv/Δt puis F = m·a, EST au programme) ;
+```
+
+Deux règles ajoutées dans les RÈGLES RAG :
+
+```
+- ID d'exercice repéré dans le message : {{#EXTRAIRE_ID.id_exercice#}}. Les exercices JNG-PC-01 à
+  JNG-PC-14 sont TOUS dans la base : ne dis jamais qu'un de ces ID est absent de la base.
+- Si l'élève donne un ID de la base mais que sa réponse n'est pas lisible (lettres au hasard, texte
+  sans calcul ni résultat), réponds exactement : « INSUFFISANT : ta réponse à [ID] est illisible.
+  Envoie ton calcul ou ton résultat, par exemple : [ID] : [grandeur] = … [unité]. »
+```
+
 ## Ce qui a été ajouté au prompt SYSTEM du Rédacteur (S5, après les tests)
 
 Deux règles insérées dans ses RÈGLES STRICTES :
@@ -95,4 +117,4 @@ Prompts complets du Chercheur et du Rédacteur : voir l'application « jang (sau
 | Chercheur (temp. 0), Rédacteur (temp. 0,3) | OpenAI `gpt-5.6-luna` (crédits d'essai Dify, épuisés le 28/09) | **`gemini-3.5-flash-lite`** (clé gratuite Google AI Studio), 1 nouvelle tentative automatique |
 | Embeddings de la base | — | **`gemini-embedding-001`**, recherche sémantique, Top K 3 |
 
-Versions publiées dans Dify : « S5 RAG + Gemini », puis « S5 RAG v2 » (cas « pas vu en classe »), puis « S5 RAG v3 » (30/09, base fixe programme + constantes).
+Versions publiées dans Dify : « S5 RAG + Gemini », puis « S5 RAG v2 » (cas « pas vu en classe »), puis « S5 RAG v3 » (30/09, base fixe programme + constantes), puis « S5 RAG v4 » (30/09, EXTRAIRE_ID + réponse illisible).

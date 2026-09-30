@@ -330,6 +330,23 @@ aucune donnée personnelle.
 
 ---
 
+## S5-6 — Réponse illisible : ID non retrouvé par la recherche
+
+- **Date :** 30/09/2026 · **Outil :** Dify + site Lovable · **Technique :** débogage sur la TRACE (prompt section 8 du tutoriel), puis correction par un nœud Code
+- **Problème :** sur le site, `JNG-PC-01 : grtefcxcv` → « Je ne peux pas corriger ce message ». Dans Dify, la vraie raison était fausse : « JNG-PC-01 ne figure pas dans la base ».
+
+**Localisation (TRACE) :** le 1er nœud en défaut est la **Récupération** : la recherche sémantique ne lit pas l'ID comme un mot-clé, et le mot sans sens l'égare (satellites, photon, alcools). Le Chercheur n'y est pour rien : il n'a jamais reçu JNG-PC-01.
+
+**Essai 1 — recherche hybride :** échec (ID toujours absent, R3 dégradé). Annulé.
+**Essai 2 — nœud Code EXTRAIRE_ID :** une expression régulière repère l'ID et la requête devient l'énoncé de référence → exercice retrouvé à coup sûr. Deux règles ajoutées au Chercheur (ID repéré, réponse illisible).
+
+**Résultat :** T10 ✅ « ta réponse à JNG-PC-01 est illisible… » ; T1, T2, T6, T7 ✅. T8 a régressé puis a été corrigé en réécrivant la condition « programme » de l'étape 3. Publié en « S5 RAG v4 ».
+
+**Critique :** le site Lovable affiche une phrase fixe au lieu de `message_erreur` : l'élève ne voit pas la raison. Chaque message est traité seul (« C'est ce que j'ai fais » n'a pas de contexte).
+**Itération :** prompt Lovable L-ERR prêt (afficher `message_erreur` sans le mot INSUFFISANT), à lancer quand les crédits reviennent.
+
+---
+
 ## Modèle pour les prochaines entrées
 
 ```

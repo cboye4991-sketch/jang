@@ -219,6 +219,20 @@ Ne change pas la logique du chat ni la fonction serveur « corriger ».
 
 Test après refonte : T2 envoyé depuis la page Exercices → correction correcte (cos au lieu de sin, exercice α = 20° de la base). La fonction serveur n'a pas été touchée.
 
+### L-ERR — Afficher la vraie raison d'un refus (en attente de crédits, 1 crédit)
+
+À coller dans Lovable :
+
+```
+Dans le chat de correction, quand la fonction serveur « corriger » reçoit data.outputs.message_erreur
+de Dify, n'affiche plus la phrase fixe « Je ne peux pas corriger ce message… ». Affiche à la place le
+texte de message_erreur, en retirant le préfixe « INSUFFISANT : » et en mettant la première lettre en
+majuscule. Garde la même bulle blanche. Si message_erreur est vide, garde la phrase fixe actuelle.
+Ne modifie rien d'autre (design, clé, fonction serveur).
+```
+
+Test après application : `JNG-PC-01 : grtefcxcv` → « Ta réponse à JNG-PC-01 est illisible. Envoie ton calcul ou ton résultat… ».
+
 ## Captures (L4)
 
 | Capture | Fichier |

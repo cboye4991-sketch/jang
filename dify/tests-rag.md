@@ -47,6 +47,22 @@ Appliqué d'après le tutoriel *GET 409 — S5 — Tutoriel Dify RAG à deux rec
 
 Non-régression v3 (30/09) : T1 ✅ (volume en mL, 8 s) · T6 ✅ `message_erreur` météo · T7 ✅ `message_erreur` SVT · T8 ✅ · T9 ✅. La règle « jamais hors niveau » ne fait pas accepter les autres matières.
 
+## B ter. Réponse illisible et ID non retrouvé (30/09/2026, version « S5 RAG v4 »)
+
+**Problème vu sur le site :** `JNG-PC-01 : grtefcxcv` → refus avec une **fausse raison** (« JNG-PC-01 ne figure pas dans la base »). Trace : la recherche sémantique, égarée par le mot sans sens, renvoyait les fiches satellites / photon / alcools, jamais JNG-PC-01.
+
+| Essai | Résultat |
+|---|---|
+| Recherche **hybride** (sémantique 0,6 + mots-clés 0,4) | ❌ JNG-PC-01 toujours absent ; « condensateur » moins bien classé (périmètre avant Dipôle RC). Annulé, retour au sémantique. |
+| **Nœud Code EXTRAIRE_ID** (regex `JNG-PC-xx` → requête = énoncé de référence de l'exercice) | ✅ JNG-PC-01 (CSV + fiche) en tête de la récupération |
+
+| # | Message | Attendu | Résultat v4 |
+|---|---|---|---|
+| T10 | `JNG-PC-01 : grtefcxcv` | Refus avec la bonne raison | ✅ « INSUFFISANT : ta réponse à JNG-PC-01 est illisible. Envoie ton calcul ou ton résultat, par exemple : JNG-PC-01 : C = … mol/L et pH = … » (5 s) |
+| T11 | `C'est ce que j'ai fais` (message de suite) | Refus : Jàng ne garde pas l'historique | ✅ « INSUFFISANT : l'énoncé de l'exercice et la réponse n'ont pas été fournis. » — limite connue : chaque message est traité seul |
+
+Non-régression v4 : T1 ✅ · T2 ✅ (cos/sin) · T6 ✅ · T7 ✅. **T8 a d'abord re-échoué** (« cinématique élémentaire hors programme ») : la condition « relève du programme » de l'étape 3 l'emportait sur la règle du bloc. Condition réécrite (« d'un chapitre listé dans le BLOC PROGRAMME ») → T8 ✅ deux fois de suite.
+
 ## C. Critères de réussite (rappel HMW / VPC)
 
 - **Fiabilité :** sur T1–T4, l'erreur pointée est celle du corrigé de référence (0 erreur inventée).
