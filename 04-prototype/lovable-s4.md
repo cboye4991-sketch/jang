@@ -210,6 +210,15 @@ Continue la refonte « cahier corrigé » :
 Ne change pas la logique du chat ni la fonction serveur « corriger ».
 ```
 
+### Application du design v2 (30/09)
+
+| # | Prompt | Résultat |
+|---|---|---|
+| D1 | Identité et hero (texte ci-dessus, précédé de « Ignore la demande d'animations mise en pause ») | ✅ Lovable a proposé un plan, approuvé tel quel. Papier quadrillé, 4 polices, logo « apprendre », titre souligné au stylo rouge, téléphone de démo avec l'erreur entourée et « en litres ! », « Rejouer la démo ». ~3,5 crédits. |
+| D2 (resserré) | 1. démo sans résultat final dans « La méthode » · 2. style de la fenêtre de correction · 3. cartes lignées · 4. section « Les annales, tu les as déjà… » et retrait des 3 chiffres | 🟡 Interrompu par les crédits, mais 1, 3 et 4 sont appliqués et le style de la fenêtre aussi. Reste : couleurs des titres de rubrique dans les réponses du chat, encart professeurs sur fond encre. |
+
+Test après refonte : T2 envoyé depuis la page Exercices → correction correcte (cos au lieu de sin, exercice α = 20° de la base). La fonction serveur n'a pas été touchée.
+
 ## Captures (L4)
 
 | Capture | Fichier |
@@ -217,7 +226,8 @@ Ne change pas la logique du chat ni la fonction serveur « corriger ».
 | Mobile — Accueil avec illustration | [`05-test/captures/s4-mobile-accueil.jpg`](../05-test/captures/s4-mobile-accueil.jpg) |
 | Mobile — Exercices (V1, avant P1) | [`05-test/captures/s4-mobile-exercices-v1.jpg`](../05-test/captures/s4-mobile-exercices-v1.jpg) |
 | Mobile — Correction T1 dans la fenêtre Jàng | [`05-test/captures/s4-mobile-chat-T1.jpg`](../05-test/captures/s4-mobile-chat-T1.jpg) |
-| Desktop | *à faire après la publication finale* |
+| Desktop — Accueil v2 (téléphone de démo) | [`05-test/captures/s4-desktop-accueil-v2.jpg`](../05-test/captures/s4-desktop-accueil-v2.jpg) |
+| Desktop — Correction T2 dans la fenêtre v2 | [`05-test/captures/s4-desktop-chat-T2-v2.jpg`](../05-test/captures/s4-desktop-chat-T2-v2.jpg) |
 
 ## Note d'itération (½ page, L4)
 
