@@ -58,8 +58,9 @@ Un **bot WhatsApp** qui :
 | S1 — Empathie | [Carte d'empathie](01-empathize/carte-empathie.md) · [HMW draft](02-define/hmw.md) · [Journal de prompts](prompts/journal-de-prompts.md) | ✅ |
 | S2 — Idéation & Prompt Engineering | [6 Chapeaux](docs/chapeaux-bono.md) · [VPC](docs/vpc.md) · [HMW définitif](docs/hmw-definitif.md) · [Journal P1–P5](prompts/journal-de-prompts.md#séance-2--les-5-prompts-métier-tp-guidé--prompts-vpc--hmw) · [Pitch 2 min](soutenance/pitch-hmw-s2.md) | ✅ |
 | S3 — Multi-agents Dify | Workflow « jang » : Chercheur → SI/SINON → Rédacteur ([description](dify/prompts-agents.md)) | ✅ dans Dify |
-| S4 — MVP Lovable | [Prompts, journal et note d'itération](04-prototype/lovable-s4.md) · [captures](05-test/captures/) — 3 pages, filtres, illustrations SVG, fenêtre de correction reliée à Dify | 🟡 Construit et testé ; animations en pause (crédits), publication finale à faire |
-| S5 — RAG & intégration | [Base `Jang_KB_v1`](dify/knowledge/) · [Schéma V2](docs/architecture-v2.png) · [Plan de tests](dify/tests-rag.md) · [Journal S5](prompts/journal-de-prompts.md#séance-5--rag--intégration-dify) · [Note d'éthique](docs/note-ethique-rag.md) · [Plan B](soutenance/plan-b-s6.md) | ✅ Publié dans Dify (Gemini), 7/8 tests OK — captures d'écran à faire |
+| S4 — MVP Lovable | [Prompts, journal et note d'itération](04-prototype/lovable-s4.md) · [captures](05-test/captures/) — 3 pages, filtres, illustrations SVG, fenêtre de correction reliée à Dify | ✅ Construit et testé. Code sorti de Lovable le 30/09 → dépôt [`jang-bac-helper`](https://github.com/cboye4991-sketch/jang-bac-helper), modifié sur VS Code, déploiement Vercel (la clé Dify reste côté serveur) |
+| S5 — RAG & intégration | [Base `Jang_KB_v1`](dify/knowledge/) · [Schéma V2](docs/architecture-v2.png) · [Plan de tests](dify/tests-rag.md) · [Journal S5](prompts/journal-de-prompts.md#séance-5--rag--intégration-dify) · [Note d'éthique](docs/note-ethique-rag.md) · [Plan B](soutenance/plan-b-s6.md) | ✅ Publié dans Dify (« S5 RAG v4 », RAG à deux recherches + EXTRAIRE_ID), T1–T11 OK — captures d'écran à faire |
+| S7 — Vidéo teaser | [Script (template rempli)](06-video/jang-script-teaser.pptx) · [Prompts Kling / Veo, montage CapCut, sous-titres](06-video/teaser-s7.md) | 🟡 Script prêt — tournage et montage à faire |
 
 ## Équipe
 
