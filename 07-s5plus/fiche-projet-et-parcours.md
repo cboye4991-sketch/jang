@@ -20,7 +20,7 @@
 | Dépôt, accès local, OS | [`cboye4991-sketch/jang-bac-helper`](https://github.com/cboye4991-sketch/jang-bac-helper) (code, synchronisé avec Lovable) + [`cboye4991-sketch/jang`](https://github.com/cboye4991-sketch/jang) (dossier du cours) ; clone local `~/Downloads/class07/jang-bac-helper` ; **macOS** | [Projet] |
 | État actuel | ✅ Workflow publié, 10/10 dernières exécutions réussies ; ✅ build local OK ; ✅ le chat affiche la vraie raison des refus ; ⚠️ aucun lien public actif (site Lovable dépublié, Vercel/Netlify exclus par l'enseignant) ; ⚠️ limite « knowledge base request rate limit » du plan Dify gratuit si les tests s'enchaînent | [Projet] / tests du 01/10 |
 
-**Cases à compléter par l'équipe :** aucune bloquante. L'URL publique sera ajoutée après le module F.
+**Cases à compléter par l'équipe :** aucune.
 
 ## Parcours personnalisé (règle de décision §1.2)
 
@@ -32,7 +32,7 @@ Rien n'est cassé → **B** avant toute nouvelle fonctionnalité, puis **D** ; *
 | 1 | **E** Erreur lisible (§6.1) | ✅ fait le 01/10 | S | Le chat affiche « Détail technique : Dify 400 : … » ou « Clé API absente du serveur », jamais la clé |
 | 2 | **B** Batterie T1–T6 | ✅ fait le 01/10 | S | [`tests-t1-t6.md`](tests-t1-t6.md) — 1 correction de prompt (T3) |
 | 3 | **C** Local (GitHub → VS Code + Claude Code) | ✅ fait | S | Clone, `npm install`, build et `npm run dev` validés ; routine macOS `relancer_local.command` |
-| 4 | **F** Mise en ligne hors Lovable | 🟡 prêt, à lancer par l'équipe | S | Piste 1 du cours : **Cloudflare Workers** (`deployer_jang.command` + `cle_dify_cloudflare.command`) ; essai à blanc `wrangler deploy --dry-run` réussi (381 Ko) |
+| 4 | **F** Mise en ligne hors Lovable | ✅ en ligne (01/10) | S | **GitHub Pages + fonction Supabase `corriger`** (option du §4.6 « si votre agent passe déjà par une Edge Function Supabase, gardez-la ») : **https://cboye4991-sketch.github.io/jang-bac-helper/** — clé dans les secrets Supabase. Cloudflare Workers (piste 1) reste prêt en secours (essai à blanc réussi). |
 | 5 | **D** Fonctionnalité innovante | ✅ « Vérifie mon similaire » choisie et livrée (01/10) | M | [`module-d-fonctionnalites.md`](module-d-fonctionnalites.md) |
 
 ## Check-list de fin de séance (§8)
@@ -43,7 +43,7 @@ Rien n'est cassé → **B** avant toute nouvelle fonctionnalité, puis **D** ; *
 | ✅ | T1–T6 écrits dans le Journal et tous réussis après la dernière modification | [tests-t1-t6.md](tests-t1-t6.md) |
 | ✅ | Au moins 1 fonctionnalité innovante : spec, Dify, app, tests T7–T8 | « Vérifie mon similaire » — Dify « S5+ v6 », bouton dans le chat ([module D](module-d-fonctionnalites.md)) |
 | ✅ | Code poussé sur GitHub sans `.env.local` ; Lovable synchronisé | après `git push` de l'équipe |
-| ☐ | Lien public testé depuis un autre appareil | après `deployer_jang.command` (Cloudflare) |
+| 🟡 | Lien public testé depuis un autre appareil | [https://cboye4991-sketch.github.io/jang-bac-helper/](https://cboye4991-sketch.github.io/jang-bac-helper/) testé le 01/10 depuis le navigateur de Claude : T2 (correction + titres colorés + bouton) et T7 (vérification) ✅ — **reste : test depuis un téléphone** |
 | ✅ | Journal L4 complété | entrée S5+-1 |
 | ✅ | Note d'éthique mise à jour (1 ligne par fonctionnalité) | [§5 du registre](../docs/note-ethique-rag.md) |
 | ✅ | Aucune clé collée dans un chat | clé collée uniquement dans Dify, Lovable, `.env.local` |

@@ -10,7 +10,7 @@
 | **1 · Le problème** (0–15 s) | Nuit à Kaffrine. Une élève de Terminale S révise seule à la lumière de son téléphone, cahier de physique couvert de ratures. | « Kaffrine, 23 h. Aminata révise seule. Personne pour lui dire où elle s'est trompée. Au Bac 2026, à peine un candidat sur quatre a été admis dès le premier tour. » | urgence / émotion |
 | **2 · La solution** (15–30 s) | **Enregistrement réel** du site Jàng sur téléphone : choix de JNG-PC-01, réponse tapée comme un message WhatsApp. | « Voici Jàng. Aminata choisit un exercice type Bac et envoie sa réponse, comme un message WhatsApp. Quelques secondes plus tard, Jàng lui montre sa première erreur. Pas la solution : l'erreur. » | espoir / clarté |
 | **3 · L'agent IA** (30–45 s) | La correction s'affiche bloc par bloc (✅ ❌ 💡 ➡️) ; en surimpression : 2 agents IA + base de corrigés (schéma d'architecture V2 animé). | « Derrière, deux agents IA. Le premier retrouve le corrigé de référence dans notre base d'exercices, au lieu de l'inventer. Le second rédige une correction de moins de 90 mots, avec un exercice pour s'entraîner. » | innovation / précision / confiance |
-| **4 · Impact + CTA** (45–60 s) | Aminata réussit l'exercice similaire et sourit. À l'écran : « 1 correction < 100 Ko », puis logo Jàng, URL Vercel et QR code. | « Une correction pèse moins qu'une photo WhatsApp. Notre objectif : un correcteur dans la poche de chaque élève de Terminale S en région. Jàng, en wolof : apprendre. Essaie-le sur notre site. » | conviction / appel à l'action |
+| **4 · Impact + CTA** (45–60 s) | Aminata réussit l'exercice similaire et sourit. À l'écran : « 1 correction < 100 Ko », puis logo Jàng, URL du site et QR code. | « Une correction pèse moins qu'une photo WhatsApp. Notre objectif : un correcteur dans la poche de chaque élève de Terminale S en région. Jàng, en wolof : apprendre. Essaie-le sur notre site. » | conviction / appel à l'action |
 
 **Source du chiffre (acte 1) :** Office du Bac, résultats provisoires du 1er tour du Bac général 2026 : **26,45 %** d'admis d'office (45 614 admis) — [Le Soleil](https://lesoleil.sn/actualites/education/bac-2026-plus-de-12-000-mentions-un-taux-provisoire-de-2645-au-premier-tour/), [APA News](https://fr.apanews.net/education/senegal-2645-de-reussite-au-1er-tour-du-baccalaureat-general-2026/). Afficher la source en petit à l'écran pendant l'acte 1.
 
@@ -65,7 +65,7 @@ Scene 6: "Jàng, en wolof : apprendre."
 | Piste | 0–15 s | 15–30 s | 30–45 s | 45–60 s |
 |---|---|---|---|---|
 | Vidéo | A1-a · A1-b · A1-c | écran du site (choix JNG-PC-01, saisie) | correction qui s'affiche + schéma d'architecture | A4-a · A4-b · carte finale (logo, URL, QR) |
-| Texte à l'écran | « Bac 2026 : 26,45 % d'admis au 1er tour » + source | « JNG-PC-01 : C = 0,05/500 » | « 2 agents IA · corrigés vérifiés (RAG) » | « 1 correction < 100 Ko » · URL Vercel |
+| Texte à l'écran | « Bac 2026 : 26,45 % d'admis au 1er tour » + source | « JNG-PC-01 : C = 0,05/500 » | « 2 agents IA · corrigés vérifiés (RAG) » | « 1 correction < 100 Ko » · URL du site |
 | Voix off | acte 1 | acte 2 | acte 3 | acte 4 |
 | Musique | libre de droits CapCut, **20–30 %** du volume, montée douce à l'acte 4 | | | |
 
@@ -77,7 +77,7 @@ Sous-titres : **Sous-titres automatiques** de CapCut, puis correction manuelle d
 | Cafrine / Kafrine | **Kaffrine** |
 | terminal S | **Terminale S** |
 | rag / rague | **RAG** |
-| Vercelle / versel | **Vercel** |
+| github point io | **github.io** |
 | Aminatta | **Aminata** |
 
 ## 5. Checklist avant dépôt
@@ -87,5 +87,5 @@ Sous-titres : **Sous-titres automatiques** de CapCut, puis correction manuelle d
 - [ ] Sous-titres présents et relus (tableau ci-dessus)
 - [ ] Voix off audible, calée sur les 4 actes ; musique à 20–30 %
 - [ ] Source du chiffre affichée à l'acte 1
-- [ ] URL Vercel réelle à l'acte 4 (à compléter après le déploiement)
+- [ ] URL du site à l'acte 4 : **cboye4991-sketch.github.io/jang-bac-helper** (+ QR code)
 - [ ] Upload Google Drive → lien « Tous les utilisateurs disposant du lien » → dépôt e-Academy (L2)
