@@ -44,3 +44,4 @@ Une ligne par fonctionnalité ajoutée (tutoriel S5+ §7) : risque principal, ga
 | Bac blanc chronométré | stress, sentiment d'échec | message neutre sur le temps, correction bienveillante habituelle | T12 |
 | Réponse vocale | exclusion des élèves qui préfèrent le wolof | voix française uniquement, sans promesse de voix wolof non validée par un locuteur ; 0 donnée envoyée | T14 |
 | Défi WhatsApp | diffusion de données personnelles | message sans nom ni résultat, envoyé par l'élève elle-même, aucun numéro collecté | T13 |
+| Note vocale (dictée) | voix transmise au service de reconnaissance du navigateur (Google sur Chrome Android) ; valeur mal transcrite | aucun audio envoyé à Jàng ni stocké ; texte relu et envoyé par l'élève ; clavier toujours disponible | T15 |
