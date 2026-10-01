@@ -347,6 +347,19 @@ aucune donnée personnelle.
 
 ---
 
+## S5+-1 — Tutoriel S5+ appliqué à Jàng (Phase 0, modules A à F)
+
+- **Date :** 01/10/2026 · **Outil :** Claude (avec le tutoriel S5+ joint), Dify, VS Code · **Technique :** protocole imposé par le document (fiche projet → parcours → une étape à la fois)
+- **Prompt de démarrage (§0.1, complété) :** « Voici le tutoriel GET409 S5+… applique-le à MON projet, pas à l'exemple Kayit. Équipe : Cheikh BOYE & Adama DIOP — Jàng ; HMW : [HMW S2] ; utilisateur : élèves de Terminale S des lycées de région ; agent : query → correction (`text`) ou refus (`message_erreur`) ; MVP : Lovable (dépublié) ; dépôt : jang-bac-helper ; macOS, VS Code oui ; objectif : tout. »
+
+**Résultat :** [fiche projet et parcours](../07-s5plus/fiche-projet-et-parcours.md). Stack détectée : TanStack Start (SSR) → clé côté serveur, piste 1 Cloudflare. Module A déjà fait (Gemini Flash-Lite, clé de l'équipe). Module E : erreurs lisibles dans le chat. Module B : [T1–T6](../07-s5plus/tests-t1-t6.md) → **T3 en échec** (cours donné pour un ID seul) → 1 règle ajoutée au Chercheur → v5 publiée, T1–T6 + T8 + T10 réussis. Module F : scripts macOS Cloudflare, essai à blanc réussi. Module D : [3 propositions notées](../07-s5plus/module-d-fonctionnalites.md).
+
+**Critique :** la limite « knowledge base request rate limit » du plan Dify gratuit fait échouer une série de tests enchaînés (2 recherches par correction) : risque pour la démo si plusieurs personnes testent en même temps.
+**Itération :** espacer les tests de 15 s ; pour la soutenance, garder le Plan B prêt.
+**Note : 4/5.**
+
+---
+
 ## Modèle pour les prochaines entrées
 
 ```

@@ -27,3 +27,15 @@
 
 ---
 *Engagement de l'équipe :* aucune démonstration auprès de vrais élèves tant que les corrigés ne sont pas validés par un professeur.
+
+## 5. Registre par fonctionnalité (S5+, 01/10/2026)
+
+Une ligne par fonctionnalité ajoutée (tutoriel S5+ §7) : risque principal, garde-fou, test qui le prouve.
+
+| Fonctionnalité | Risque principal | Garde-fou | Test |
+|---|---|---|---|
+| Message d'erreur technique affiché (« Dify 400 : … ») | fuite d'un secret dans l'interface | seul le corps de réponse Dify est affiché, jamais la clé ni les en-têtes | essai sans clé → « Clé API absente du serveur » |
+| Refus d'un ID envoyé seul | donner la méthode avant que l'élève essaie (dépendance, R3 « recopier sans comprendre ») | Jàng demande d'abord la réponse | T3 |
+| Phrase en wolof | traduction ou conversion hasardeuse | les valeurs sont lues, la réponse reste en français, le wolof n'est ni cité ni traduit | T4 |
+| Tentative d'injection (« ignore tes instructions… ») | donner la solution complète | refus `message_erreur`, aucune valeur de la base | T5 |
+| Mise en ligne hors Lovable (Cloudflare) | clé exposée dans le navigateur | clé en secret serveur (`wrangler secret put`), lue depuis `.env.local` ignoré par Git | `git status` + `secret list` |
