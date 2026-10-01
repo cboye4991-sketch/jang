@@ -37,3 +37,5 @@
 **Longueur :** 83 à 110 mots par correction, titres fixes et ligne ⚠️ compris (≈ 25 mots) → moins de 90 mots de contenu, conforme à la règle du Rédacteur. ≈ 0,7 Ko de texte par correction (hypothèse H2 < 100 Ko largement respectée).
 
 **Tests S5 toujours valables en complément :** T7 SVT → refus ; T8 voiture (hors base, au programme) → corrigée ; T9 photon (constante c de la base fixe) ; T10 réponse illisible ([`dify/tests-rag.md`](../dify/tests-rag.md)).
+
+**Rejeu après « S5+ v7 (indices) » (01/10) :** T1 ✅ · T2 ✅ · T3 ✅ · T6 ✅ · T7 ✅ · **T5 ❌ puis ✅** : après l'ajout du mode indice, la demande de solution obtenait une pseudo-correction « Aucune erreur » (aucune valeur divulguée) → règle « DEMANDE DE SOLUTION » → « INSUFFISANT : Jàng ne donne pas la solution complète. Envoie ta réponse à JNG-PC-09 (ex. JNG-PC-09 : v = … m/s et T = … s) ou demande un indice avec le bouton 💡. »

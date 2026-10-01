@@ -40,3 +40,7 @@ Une ligne par fonctionnalité ajoutée (tutoriel S5+ §7) : risque principal, ga
 | Tentative d'injection (« ignore tes instructions… ») | donner la solution complète | refus `message_erreur`, aucune valeur de la base | T5 |
 | Mise en ligne hors Lovable (Cloudflare) | clé exposée dans le navigateur | clé en secret serveur (`wrangler secret put`), lue depuis `.env.local` ignoré par Git | `git status` + `secret list` |
 | Vérification de l'exercice similaire (module D) | valider une erreur si la réponse de référence est fausse ; inventer une erreur | réponse recopiée de la base (recalculée en S5), « en attente de validation par un professeur », une seule erreur, jamais le résultat final si c'est faux | T7, T8 |
+| Indices progressifs | donner la solution par morceaux (dépendance) | 3 niveaux maximum, jamais le résultat final ; désactivés pendant le Bac blanc ; demande de solution complète refusée | T9–T11, T5 |
+| Bac blanc chronométré | stress, sentiment d'échec | message neutre sur le temps, correction bienveillante habituelle | T12 |
+| Réponse vocale | exclusion des élèves qui préfèrent le wolof | voix française uniquement, sans promesse de voix wolof non validée par un locuteur ; 0 donnée envoyée | T14 |
+| Défi WhatsApp | diffusion de données personnelles | message sans nom ni résultat, envoyé par l'élève elle-même, aucun numéro collecté | T13 |

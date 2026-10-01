@@ -373,6 +373,18 @@ aucune donnée personnelle.
 
 ---
 
+## S5+-3 — Quatre fonctionnalités côté application
+
+- **Date :** 01/10/2026 · **Outil :** Claude (code), Dify · **Technique :** 1 prompt = 1 modification ; tests rejoués après chaque changement de prompt
+- **Demande de l'équipe :** « On peut ajouter les indices progressifs, Bac blanc chronométré, réponse vocale et Défi WhatsApp. »
+
+**Résultat :** [détail](../07-s5plus/fonctionnalites-app.md). Dify « S5+ v7 » : mode `indice` (3 niveaux dosés). Application : bouton 💡 Indice N/3, 🎲 Bac blanc 15 min (14 exercices, chrono), 🔊 lecture vocale (synthèse du téléphone, 0 data), 📲 Défi WhatsApp (lien `?ex=`).
+
+**Critique :** 2 régressions repérées par les tests : « [ID] » affiché tel quel dans l'indice 1 (précision du Rédacteur) ; **T5 (injection) n'était plus refusé** après l'ajout du mode indice — Jàng répondait « Aucune erreur » à une demande de solution (sans fuite de valeur). Règle « DEMANDE DE SOLUTION » ajoutée en tête des règles RAG, qui renvoie vers le bouton 💡.
+**Note : 4/5.**
+
+---
+
 ## Modèle pour les prochaines entrées
 
 ```
