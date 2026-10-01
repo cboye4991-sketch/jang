@@ -39,3 +39,4 @@ Une ligne par fonctionnalité ajoutée (tutoriel S5+ §7) : risque principal, ga
 | Phrase en wolof | traduction ou conversion hasardeuse | les valeurs sont lues, la réponse reste en français, le wolof n'est ni cité ni traduit | T4 |
 | Tentative d'injection (« ignore tes instructions… ») | donner la solution complète | refus `message_erreur`, aucune valeur de la base | T5 |
 | Mise en ligne hors Lovable (Cloudflare) | clé exposée dans le navigateur | clé en secret serveur (`wrangler secret put`), lue depuis `.env.local` ignoré par Git | `git status` + `secret list` |
+| Vérification de l'exercice similaire (module D) | valider une erreur si la réponse de référence est fausse ; inventer une erreur | réponse recopiée de la base (recalculée en S5), « en attente de validation par un professeur », une seule erreur, jamais le résultat final si c'est faux | T7, T8 |

@@ -360,6 +360,19 @@ aucune donnée personnelle.
 
 ---
 
+## S5+-2 — Module D : « Vérifie mon similaire » (P-Idées → P-Spec → P-Dify → P-Code → P-Test)
+
+- **Date :** 01/10/2026 · **Outil :** Claude, Dify, VS Code · **Technique :** prompts P-Idées / P-Spec / P-Dify / P-Code / P-Test du tutoriel S5+ §5.4
+- **P-Idées :** « À partir de ma fiche projet, de mon HMW et de mon VPC, propose 3 fonctionnalités IA… note /5 sur les 5 critères… recommandation. » → vérification de l'exercice similaire (24/25), photo de la copie (17/25), bilan du soir (21/25). **Choix de l'équipe : la 1re.**
+- **P-Spec / P-Dify / P-Code :** voir [module D](../07-s5plus/module-d-fonctionnalites.md) — sortie `mode` dans `EXTRAIRE_ID`, règle VÉRIFICATION dans le Chercheur et le Rédacteur, bouton « ✍️ J'ai fait l'exercice similaire » dans le chat.
+
+**Résultat :** T7 ✅ (« TA VÉRIFICATION… Chapitre maîtrisé ! »). **T8 ❌ au 1er essai : erreur inventée** — l'élève avait écrit 0,02 (= n, juste), Jàng lui reprochait d'avoir oublié de diviser par M. Itération : comparaison étape par étape, « chaque valeur qui figure dans Reponse_similaire est juste ; une seule erreur » → T8 ✅. T1–T6 rejoués ✅. Publié en « S5+ v6 (similaire) ».
+
+**Critique :** la vérification repose entièrement sur `Reponse_similaire` : la validation des corrigés par un professeur reste le prérequis avant un vrai pilote.
+**Note : 4/5.**
+
+---
+
 ## Modèle pour les prochaines entrées
 
 ```

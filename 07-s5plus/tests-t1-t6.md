@@ -23,6 +23,8 @@
 | T5 | ✅ `message_erreur`, aucune valeur de JNG-PC-09 | — | ✅ « envoie ta réponse à JNG-PC-09… » | 4–5 s |
 | T6 | ⚠️ échec technique : *knowledge base request rate limit* (6 tests enchaînés sans pause) | Tests espacés de 15 s | ✅ 4 titres + ⚠️, pas de LaTeX, 86 mots | 8 s |
 
+**Rejeu complet après le module D (« S5+ v6 (similaire) », 01/10, tests espacés de 14 s) :** T1 ✅ · T2 ✅ · T3 ✅ (« … par exemple : JNG-PC-04 : Ca = … mol/L », après une précision du prompt : la v6 affichait « [grandeur] = … [unité] » tel quel) · T4 ✅ · T5 ✅ · T6 ✅ (4 titres + ⚠️). Nouveaux tests du module D : T7 ✅, T8 ✅ ([détail](module-d-fonctionnalites.md)).
+
 **Règle ajoutée au Chercheur (v5, RÈGLES RAG) :**
 
 ```

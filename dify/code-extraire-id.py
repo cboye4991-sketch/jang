@@ -21,11 +21,13 @@ EXERCICES = {
 def main(query: str) -> dict:
     # Repère un ID du type JNG-PC-01 (tolère « jng pc 1 », « JNG-PC 01 »…)
     m = re.search(r"JNG[\s_-]*PC[\s_-]*0*(\d{1,2})", query or "", re.IGNORECASE)
+    # Mode « vérification » : l'élève renvoie sa réponse à l'EXERCICE SIMILAIRE (S5+, module D)
+    mode = "similaire" if re.search(r"\bsimilaire\b", query or "", re.IGNORECASE) else "correction"
     if m:
         id_ex = "JNG-PC-%02d" % int(m.group(1))
         if id_ex in EXERCICES:
             # Requête = énoncé de référence : la recherche retrouve l'exercice
             # même si la réponse de l'élève est illisible ou très courte.
-            return {"requete_recherche": EXERCICES[id_ex], "id_exercice": id_ex}
-        return {"requete_recherche": query, "id_exercice": id_ex + " (hors base)"}
-    return {"requete_recherche": query, "id_exercice": "aucun"}
+            return {"requete_recherche": EXERCICES[id_ex], "id_exercice": id_ex, "mode": mode}
+        return {"requete_recherche": query, "id_exercice": id_ex + " (hors base)", "mode": mode}
+    return {"requete_recherche": query, "id_exercice": "aucun", "mode": "correction"}

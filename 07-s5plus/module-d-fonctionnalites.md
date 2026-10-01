@@ -47,3 +47,38 @@
 **Proposition 1.** Elle ferme la boucle promise par le HMW (« afin de savoir se corriger seule ») et se démontre en moins de 2 minutes : T1 (erreur repérée) → l'élève refait l'exercice similaire → ✅. Elle réutilise une donnée déjà dans la base (`Reponse_similaire`), ne coûte aucune clé ni service, et respecte la contrainte data. La proposition 2 est la plus spectaculaire mais contredit la contrainte data et demande une séance entière ; à garder pour une V3.
 
 **Tests prévus pour la proposition 1 :** T7 `JNG-PC-07 · similaire : a = 3,4 m/s² ; v = 3,2 m/s` (juste → ✅ bravo, chapitre maîtrisé) ; T8 `JNG-PC-01 · similaire : C = 0,02/250 = 0,00008 mol/L` (faux → ❌ indice sur l'erreur, sans donner 0,080 mol/L).
+
+---
+
+## ✅ Fonctionnalité retenue par l'équipe (01/10) : « Vérifie mon similaire »
+
+### Spécification (P-Spec)
+
+**User story :** En tant qu'élève qui révise seule, après une correction, je refais l'exercice « ➡️ À TOI » et j'envoie mon résultat, pour savoir le soir même si j'ai vraiment compris et si je sais me corriger seule.
+
+**Critères d'acceptation :**
+1. Un message `JNG-PC-xx · similaire : <réponse>` est comparé à `Reponse_similaire` de la base, recopiée telle quelle, **jamais recalculée**.
+2. Juste → « 📘 JÀNG — TA VÉRIFICATION » + « Tout est juste… Chapitre maîtrisé ! », sans ❌ ni 💡. Faux → la **première** étape qui diffère de la référence, la méthode **sans le résultat final**, « renvoie-le avec le mot similaire ».
+3. Sous chaque correction qui contient ➡️ À TOI (hors vérification), un bouton **« ✍️ J'ai fait l'exercice similaire »** pré-remplit `JNG-PC-xx · similaire : ` et place le curseur.
+
+### Modifications Dify (P-Dify) — publiées en « S5+ v6 (similaire) »
+
+| Nœud | Modification |
+|---|---|
+| `EXTRAIRE_ID` (Code) | nouvelle sortie **`mode`** = `similaire` si le message contient le mot « similaire », sinon `correction` ([code](../dify/code-extraire-id.py)) |
+| Chercheur | règle « MODE DU MESSAGE : {{#EXTRAIRE_ID.mode#}} … VÉRIFICATION » (comparaison étape par étape à `Reponse_similaire`, une seule erreur) — texte dans [`dify/prompts-agents.md`](../dify/prompts-agents.md) |
+| Rédacteur | règle « CAS VÉRIFICATION » (titre, format court si juste) |
+
+### Modification de l'application (P-Code)
+
+`src/components/ChatJang.tsx` : détection de l'ID dans le message de l'élève (même expression que `EXTRAIRE_ID`), champ `similaireId` sur la réponse de Jàng, bouton qui pré-remplit la zone de saisie. Aucune dépendance ajoutée, rien n'est stocké.
+
+### Tests (P-Test)
+
+| # | Entrée | Attendu | Résultat 01/10 |
+|---|---|---|---|
+| T7 | `JNG-PC-07 · similaire : a = 3,4 m/s² ; v = 3,2 m/s` | « TA VÉRIFICATION », tout juste, chapitre maîtrisé | ✅ |
+| T8 | `JNG-PC-01 · similaire : C = 0,02/250 = 0,00008 mol/L` | 1re erreur = volume en mL ; 0,080 mol/L non donné | ❌ 1er essai : erreur **inventée** (« oublié de diviser par M » alors que 0,02 = n est juste) → règle « chaque valeur qui figure dans Reponse_similaire est juste ; une seule erreur » → ✅ volume en litres, sans résultat |
+| Bouton | correction de JNG-PC-01 dans le site | bouton présent ; clic → `JNG-PC-01 · similaire : ` ; pas de bouton sous une vérification | ✅ (test automatisé du site statique) |
+
+**Risque éthique + garde-fou :** une `Reponse_similaire` fausse validerait une erreur → mention « réponse similaire Jàng, en attente de validation par un professeur » dans SOURCES et ligne ⚠️ ; les réponses similaires ont été recalculées en Python (S5).

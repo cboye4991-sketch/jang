@@ -33,15 +33,15 @@ Rien n'est cassé → **B** avant toute nouvelle fonctionnalité, puis **D** ; *
 | 2 | **B** Batterie T1–T6 | ✅ fait le 01/10 | S | [`tests-t1-t6.md`](tests-t1-t6.md) — 1 correction de prompt (T3) |
 | 3 | **C** Local (GitHub → VS Code + Claude Code) | ✅ fait | S | Clone, `npm install`, build et `npm run dev` validés ; routine macOS `relancer_local.command` |
 | 4 | **F** Mise en ligne hors Lovable | 🟡 prêt, à lancer par l'équipe | S | Piste 1 du cours : **Cloudflare Workers** (`deployer_jang.command` + `cle_dify_cloudflare.command`) ; essai à blanc `wrangler deploy --dry-run` réussi (381 Ko) |
-| 5 | **D** Fonctionnalité innovante | 🟡 3 propositions notées, choix de l'équipe attendu | M | [`module-d-fonctionnalites.md`](module-d-fonctionnalites.md) |
+| 5 | **D** Fonctionnalité innovante | ✅ « Vérifie mon similaire » choisie et livrée (01/10) | M | [`module-d-fonctionnalites.md`](module-d-fonctionnalites.md) |
 
 ## Check-list de fin de séance (§8)
 
 | ✓ | Point | État au 01/10 |
 |---|---|---|
-| ✅ | Agent Dify sur un modèle avec notre clé (point vert), workflow publié | Gemini Flash-Lite, « S5+ v5 (T3) » publiée |
+| ✅ | Agent Dify sur un modèle avec notre clé (point vert), workflow publié | Gemini Flash-Lite, « S5+ v6 (similaire) » publiée |
 | ✅ | T1–T6 écrits dans le Journal et tous réussis après la dernière modification | [tests-t1-t6.md](tests-t1-t6.md) |
-| ☐ | Au moins 1 fonctionnalité innovante : spec, Dify, app, tests T7–T8 | en attente du choix de l'équipe ([module D](module-d-fonctionnalites.md)) |
+| ✅ | Au moins 1 fonctionnalité innovante : spec, Dify, app, tests T7–T8 | « Vérifie mon similaire » — Dify « S5+ v6 », bouton dans le chat ([module D](module-d-fonctionnalites.md)) |
 | ✅ | Code poussé sur GitHub sans `.env.local` ; Lovable synchronisé | après `git push` de l'équipe |
 | ☐ | Lien public testé depuis un autre appareil | après `deployer_jang.command` (Cloudflare) |
 | ✅ | Journal L4 complété | entrée S5+-1 |

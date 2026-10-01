@@ -92,6 +92,40 @@ Deux règles ajoutées dans les RÈGLES RAG :
   Envoie ton calcul ou ton résultat, par exemple : [ID] : [grandeur] = … [unité]. »
 ```
 
+## Changements S5+ (01/10) — v5 et v6
+
+**v5 (test T3)** — RÈGLES RAG du Chercheur :
+
+```
+- Si l'élève envoie un ID de la base SANS aucune réponse (ex. « JNG-PC-04 » seul) et ne dit pas qu'il
+  n'a pas vu le chapitre, réponds exactement : « INSUFFISANT : envoie ta réponse à [ID] juste après
+  l'identifiant, par exemple : [ID] : [grandeur] = … [unité]. » Ne donne ni cours ni méthode : l'élève
+  doit d'abord essayer seul.
+```
+
+**v6 (module D « Vérifie mon similaire »)** — `EXTRAIRE_ID` sort `mode` ; Chercheur :
+
+```
+- MODE DU MESSAGE : {{#EXTRAIRE_ID.mode#}}. Si le mode est « similaire », l'élève ne répond PAS à
+  l'exercice principal mais à son EXERCICE SIMILAIRE (colonne Exercice_similaire) : c'est une
+  VÉRIFICATION. Compare sa réponse à Reponse_similaire de la base, recopiée telle quelle : ne recalcule
+  jamais. Compare étape par étape : chaque valeur de l'élève qui figure dans Reponse_similaire (même
+  écrite autrement, ex. 0,02 = 0,020 mol) est JUSTE. La PREMIÈRE ERREUR est la première étape dont la
+  valeur diffère de Reponse_similaire, et une seule. Sortie SUFFISANTE : EXERCICE = Exercice_similaire ;
+  RÉPONSE DE RÉFÉRENCE = Reponse_similaire ; EXERCICE SIMILAIRE = « Aucun — exercice de vérification » ;
+  SOURCES = « [ID] — réponse similaire Jàng, en attente de validation par un professeur ».
+```
+
+Rédacteur :
+
+```
+- CAS VÉRIFICATION : si EXERCICE SIMILAIRE vaut « Aucun — exercice de vérification », titre
+  « 📘 JÀNG — TA VÉRIFICATION ». Juste : ✅ « Tout est juste : tu sais maintenant refaire ce type
+  d'exercice seul(e). Chapitre maîtrisé ! » puis ➡️ « Choisis un autre exercice dans la liste. »
+  (sans ❌ ni 💡). Faux : ✅, ❌, 💡 sans le résultat final, puis ➡️ « Corrige ton calcul et
+  renvoie-le avec le mot similaire. » Garde la ligne ⚠️.
+```
+
 ## Ce qui a été ajouté au prompt SYSTEM du Rédacteur (S5, après les tests)
 
 Deux règles insérées dans ses RÈGLES STRICTES :
