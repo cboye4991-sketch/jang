@@ -92,7 +92,20 @@ Sous-titres : **Sous-titres automatiques** de CapCut, puis correction manuelle d
 
 ## 6. Version montée (05/10/2026)
 
-- [`jang-teaser.mp4`](jang-teaser.mp4) : 73 s, 1920×1080, 25 i/s, H.264 + AAC, sous-titres incrustés, musique de fond originale (générée, libre de droits) à ~25 %.
+- [`jang-teaser.mp4`](jang-teaser.mp4) : 73 s, 1920×1080, 25 i/s, H.264 + AAC, sous-titres incrustés, bande-son originale (voir ci-dessous), volume normalisé à −16 LUFS.
 - [`jang-teaser.srt`](jang-teaser.srt) : les 13 sous-titres minutés. Ils servent aussi de texte pour enregistrer la voix off dans CapCut.
 - Les actes 2 et 3 montrent **le vrai MVP** et une **capture réelle de Dify** ; la correction affichée est une vraie réponse du workflow (JNG-PC-01, 05/10). Les actes 1 et 4 sont des illustrations (aucune image générée de personne réelle) ; Aminata est présentée comme persona fictive.
 - Source des scènes : [`source-video.html`](source-video.html), rendu image par image, puis assemblé avec ffmpeg.
+
+### Bande-son (05/10) — composée pour le teaser, libre de droits
+
+Construite selon les usages des teasers d'app « problème → solution » : changement d'humeur au moment de la solution, transitions marquées (riser + whoosh), sons d'interface synchronisés avec l'écran, signature sonore sur le logo, musique assez basse pour une voix off.
+
+| Moment | Musique | Sons calés sur l'image |
+|---|---|---|
+| Acte 1 · nuit (0–16 s) | piano seul en *la mineur*, nappe sombre | grillons de Kaffrine, ratures au stylo, impact sourd sur « 26,45 % », riser → whoosh |
+| Acte 2 · l'app (16–34 s) | passage en *do majeur* (I–V–vi–IV), arpège de piano, battement léger | frappe au clavier, envoi du message, « Jàng écrit… », notification quand la correction arrive, « pop » sur ✅ ❌ 💡 ➡️ |
+| Acte 3 · l'IA (34–52 s) | rythme plus « tech » : pluck en doubles croches, kick régulier | pop sur chaque bloc du schéma, souffle sur les flèches, riser |
+| Acte 4 + fin (52–73 s) | version pleine (nappe lumineuse, mélodie haute) puis accord final + carillon | carillons sur les coches vertes, whoosh vers la carte finale |
+
+Fichiers pour CapCut : [`jang-musique.mp3`](jang-musique.mp3) et [`jang-sons.mp3`](jang-sons.mp3) (pistes séparées). Avec une voix off : couper le son de la vidéo, importer les deux pistes, musique à **20–30 %**, sons à **60–80 %**, voix à 100 %. Source : [`source-bandeson.py`](source-bandeson.py).
