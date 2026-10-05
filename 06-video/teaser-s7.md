@@ -89,3 +89,10 @@ Sous-titres : **Sous-titres automatiques** de CapCut, puis correction manuelle d
 - [ ] Source du chiffre affichée à l'acte 1
 - [ ] URL du site à l'acte 4 : **cboye4991-sketch.github.io/jang-bac-helper** (+ QR code)
 - [ ] Upload Google Drive → lien « Tous les utilisateurs disposant du lien » → dépôt e-Academy (L2)
+
+## 6. Version montée (05/10/2026)
+
+- [`jang-teaser.mp4`](jang-teaser.mp4) : 73 s, 1920×1080, 25 i/s, H.264 + AAC, sous-titres incrustés, musique de fond originale (générée, libre de droits) à ~25 %.
+- [`jang-teaser.srt`](jang-teaser.srt) : les 13 sous-titres minutés. Ils servent aussi de texte pour enregistrer la voix off dans CapCut.
+- Les actes 2 et 3 montrent **le vrai MVP** et une **capture réelle de Dify** ; la correction affichée est une vraie réponse du workflow (JNG-PC-01, 05/10). Les actes 1 et 4 sont des illustrations (aucune image générée de personne réelle) ; Aminata est présentée comme persona fictive.
+- Source des scènes : [`source-video.html`](source-video.html), rendu image par image, puis assemblé avec ffmpeg.

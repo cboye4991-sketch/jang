@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family:Inter,sans-serif}
+.layer{position:absolute;inset:0;opacity:0}
+.grid{background:#f4f8f6;background-image:linear-gradient(#e1ebe7 1px,transparent 1px),linear-gradient(90deg,#e1ebe7 1px,transparent 1px);background-size:36px 36px}
+#sub{position:absolute;left:50%;bottom:54px;transform:translateX(-50%);max-width:1500px;text-align:center;z-index:50}
+#sub span{display:inline;background:rgba(10,18,15,.78);color:#fff;font-size:42px;font-weight:600;line-height:1.5;padding:6px 20px;border-radius:10px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hand{font-family:"DejaVu Serif",serif;font-style:italic}
+.mono{font-family:"DejaVu Sans Mono",monospace}
+#stat{position:absolute;left:120px;top:150px;width:860px;background:rgba(255,255,255,.96);border-radius:28px;padding:48px 56px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+#stat .big{font-size:150px;font-weight:800;color:#c0392b;letter-spacing:-4px;line-height:1}
+#stat .lbl{font-size:40px;font-weight:700;color:#10231c;margin-top:14px;line-height:1.25}
+#stat .src{font-size:20px;color:#5b7269;margin-top:22px;line-height:1.4}
+.tag{position:absolute;left:60px;top:44px;font-size:22px;color:rgba(255,255,255,.75);letter-spacing:3px;text-transform:uppercase}
+.persona{position:absolute;right:60px;top:44px;font-size:20px;color:rgba(255,255,255,.6)}
+/* acte 2 */
+#a2title{position:absolute;left:150px;top:150px;font-size:96px;font-weight:800;color:#10231c;letter-spacing:-2px}
+#a2title b{color:#c0392b;font-family:"DejaVu Serif",serif;font-weight:700;font-size:64px;letter-spacing:0;margin-left:16px}
+.step{position:absolute;left:150px;font-size:38px;color:#10231c;font-weight:600;opacity:0;display:flex;gap:22px;align-items:center;width:820px;line-height:1.3}
+.step i{font-style:normal;flex:none;width:58px;height:58px;border-radius:50%;background:#0e7058;color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800}
+.blk{position:absolute;left:150px;font-size:36px;font-weight:600;opacity:0;width:820px;padding:14px 24px;border-radius:14px;background:#fff;border:2px solid #d5e5df}
+#phone{position:absolute;left:1180px;top:60px;width:486px;height:960px;border-radius:58px;background:#10231c;padding:20px;box-shadow:0 40px 90px rgba(16,35,28,.35)}
+#phone canvas{width:446px;height:892px;border-radius:40px;display:block;background:#fff}
+/* acte 3 */
+#a3title{position:absolute;left:0;right:0;top:70px;text-align:center;font-size:62px;font-weight:800;color:#10231c;letter-spacing:-1px}
+.node{position:absolute;top:200px;width:300px;height:290px;border-radius:24px;background:#fff;border:3px solid #cfe1da;padding:26px 24px;opacity:0;box-shadow:0 14px 34px rgba(16,35,28,.10)}
+.node .ic{font-size:46px}
+.node h3{font-size:30px;color:#10231c;margin-top:8px}
+.node p{font-size:21px;color:#3d5a50;margin-top:8px;line-height:1.35}
+.node.on{border-color:#0e7058;box-shadow:0 0 0 8px rgba(14,112,88,.15),0 14px 34px rgba(16,35,28,.15)}
+.arrow{position:absolute;top:342px;height:6px;background:#0e7058;border-radius:3px;transform-origin:left center}
+#dify{position:absolute;left:260px;top:530px;width:520px;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.2);opacity:0}
+#difyTxt{position:absolute;left:850px;top:560px;width:820px;font-size:36px;color:#10231c;font-weight:600;line-height:1.4;opacity:0}
+#difyTxt small{display:block;font-size:22px;color:#5b7269;font-weight:500;margin-top:16px}
+/* acte 4 */
+#ko{position:absolute;right:120px;top:140px;background:#fff;border-radius:26px;padding:36px 46px;box-shadow:0 26px 70px rgba(0,0,0,.25);opacity:0;text-align:center}
+#ko .big{font-size:96px;font-weight:800;color:#0e7058;letter-spacing:-2px}
+#ko .lbl{font-size:30px;color:#10231c;font-weight:600;margin-top:6px}
+#goal{position:absolute;right:120px;top:500px;width:700px;font-size:44px;font-weight:800;color:#10231c;line-height:1.25;opacity:0;background:rgba(255,255,255,.92);padding:30px 40px;border-radius:24px}
+/* fin */
+#fin .logo{position:absolute;left:180px;top:250px;font-size:170px;font-weight:800;color:#10231c;letter-spacing:-5px}
+#fin .logo b{font-family:"DejaVu Serif",serif;font-weight:700;color:#c0392b;font-size:96px;letter-spacing:0;margin-left:26px}
+#fin .tl{position:absolute;left:186px;top:480px;font-size:44px;color:#3d5a50;font-weight:500}
+#fin .cta{position:absolute;left:186px;top:590px;font-size:50px;color:#fff;background:#0e7058;font-weight:700;padding:22px 40px;border-radius:20px}
+#fin .url{position:absolute;left:186px;top:730px;font-size:36px;color:#0e7058;font-weight:600}
+#fin .qr{position:absolute;right:220px;top:250px;width:420px;height:420px;background:#fff;padding:24px;border-radius:24px;box-shadow:0 20px 60px rgba(16,35,28,.18)}
+#fin .qr img{width:100%;height:100%}
+#fin .qrl{position:absolute;right:220px;top:690px;width:420px;text-align:center;font-size:26px;color:#3d5a50}
+#fin .team{position:absolute;left:186px;bottom:235px;font-size:26px;color:#3d5a50}
+#fin .note{position:absolute;left:186px;bottom:198px;font-size:20px;color:#7a8f87}
+</style></head><body>
+
+<!-- ACTE 1 · plan A : la chambre la nuit -->
+<div id="s1a" class="layer">
+<svg id="room" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+ <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1622"/><stop offset="1" stop-color="#172634"/></linearGradient>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050b1a"/><stop offset="1" stop-color="#1a2b4a"/></linearGradient>
+ <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffcf7a" stop-opacity=".55"/><stop offset=".5" stop-color="#ffb347" stop-opacity=".18"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+ <radialGradient id="pglow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#9fe8ff" stop-opacity=".45"/><stop offset="1" stop-color="#9fe8ff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1920" height="1080" fill="url(#wall)"/>
+<!-- fenêtre -->
+<rect x="1080" y="120" width="600" height="470" rx="6" fill="url(#sky)" stroke="#2c3b4a" stroke-width="18"/>
+<g fill="#fff">
+ <circle cx="1150" cy="190" r="2.4"/><circle cx="1230" cy="160" r="1.8"/><circle cx="1320" cy="215" r="2.2"/><circle cx="1420" cy="170" r="1.6"/><circle cx="1500" cy="240" r="2.4"/><circle cx="1600" cy="180" r="2"/><circle cx="1180" cy="300" r="1.5"/><circle cx="1370" cy="290" r="1.8"/><circle cx="1560" cy="320" r="1.6"/><circle cx="1270" cy="250" r="1.2"/><circle cx="1460" cy="300" r="1.3"/>
+</g>
+<circle cx="1560" cy="230" r="38" fill="#f6efd6"/><circle cx="1576" cy="220" r="34" fill="#0d1830"/>
+<!-- baobab et sable -->
+<path d="M1080 540 Q1300 500 1680 530 L1680 590 L1080 590Z" fill="#2b2a2a"/>
+<path d="M1280 540 L1290 440 Q1250 420 1230 380 M1290 440 Q1300 400 1340 380 M1290 445 Q1320 430 1360 420 M1275 470 L1300 470 L1305 540" stroke="#141313" stroke-width="22" fill="none" stroke-linecap="round"/>
+<rect x="1268" y="440" width="40" height="105" rx="16" fill="#141313"/>
+<line x1="1380" y1="120" x2="1380" y2="590" stroke="#2c3b4a" stroke-width="12"/>
+<line x1="1080" y1="355" x2="1680" y2="355" stroke="#2c3b4a" stroke-width="12"/>
+<!-- bureau -->
+<rect x="0" y="720" width="1920" height="360" fill="#2a1d14"/>
+<rect x="0" y="712" width="1920" height="16" fill="#3a2a1d"/>
+<!-- lampe -->
+<ellipse cx="420" cy="760" rx="520" ry="300" fill="url(#glow)"/>
+<rect x="330" y="700" width="140" height="22" rx="8" fill="#141414"/>
+<path d="M400 700 L470 520 L560 470" stroke="#141414" stroke-width="14" fill="none" stroke-linecap="round"/>
+<path d="M520 420 L650 470 L600 560 L470 500Z" fill="#1d1d1d"/>
+<ellipse cx="560" cy="530" rx="60" ry="14" fill="#ffd88a" transform="rotate(25 560 530)"/>
+<!-- cahier (vue de face, posé) -->
+<path d="M650 735 L1060 735 L1110 800 L600 800Z" fill="#e9dfc6"/>
+<path d="M855 735 L855 800" stroke="#b8ab8c" stroke-width="3"/>
+<!-- téléphone -->
+<path d="M1230 760 L1330 760 L1350 790 L1210 790Z" fill="#0c0c0c"/>
+<ellipse cx="1280" cy="760" rx="160" ry="70" fill="url(#pglow)"/>
+<text x="960" y="1010" text-anchor="middle" font-family="Inter" font-size="30" fill="rgba(255,255,255,.0)">.</text>
+</svg>
+<div class="tag">Kaffrine · 23 h</div>
+<div class="persona">Aminata, 17 ans — persona fictive du projet</div>
+</div>
+
+<!-- ACTE 1 · plan B : le cahier vu de dessus -->
+<div id="s1b" class="layer" style="background:#22180f">
+<svg width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+ <pattern id="seyes" width="32" height="32" patternUnits="userSpaceOnUse"><rect width="32" height="32" fill="#f3ead2"/><path d="M0 0H32M0 8H32M0 16H32M0 24H32" stroke="#c9d6e8" stroke-width="1"/><path d="M0 0V32" stroke="#a9b8d0" stroke-width="1"/></pattern>
+ <radialGradient id="lamp2" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ffcc77" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+</defs>
+<g transform="rotate(-4 960 540)">
+ <rect x="330" y="120" width="1060" height="840" fill="url(#seyes)"/>
+ <line x1="430" y1="120" x2="430" y2="960" stroke="#e08a8a" stroke-width="3"/>
+ <text x="470" y="230" class="hand" font-family="DejaVu Serif" font-style="italic" font-size="44" fill="#1d3f8f">Ex. JNG-PC-01 — NaOH, 500 mL</text>
+ <text x="470" y="330" font-family="DejaVu Serif" font-style="italic" font-size="44" fill="#1d3f8f">n = m / M = 2 / 40 = 0,05 mol</text>
+ <g id="tries">
+  <text x="470" y="440" font-family="DejaVu Serif" font-style="italic" font-size="44" fill="#1d3f8f">C = n / V = 0,05 / 500 = 0,0001</text>
+  <line id="x1" x1="460" y1="428" x2="1150" y2="428" stroke="#1d3f8f" stroke-width="5"/>
+  <text x="470" y="540" font-family="DejaVu Serif" font-style="italic" font-size="44" fill="#1d3f8f">C = 500 / 0,05 = 10 000 ???</text>
+  <line id="x2" x1="460" y1="528" x2="1080" y2="528" stroke="#1d3f8f" stroke-width="5"/>
+  <text id="q" x="470" y="660" font-family="DejaVu Serif" font-style="italic" font-size="70" fill="#1d3f8f">pH = … ?</text>
+ </g>
+</g>
+<!-- stylo -->
+<g transform="rotate(32 1500 700)"><rect x="1440" y="420" width="34" height="520" rx="12" fill="#1d3f8f"/><path d="M1440 940 L1474 940 L1457 990Z" fill="#d9c9a0"/><rect x="1440" y="420" width="34" height="60" rx="10" fill="#14306e"/></g>
+<!-- téléphone éteint -->
+<rect x="1500" y="120" width="300" height="560" rx="40" fill="#0c0c0c" transform="rotate(8 1650 400)"/>
+<text x="1650" y="380" text-anchor="middle" font-family="Inter" font-size="64" font-weight="300" fill="#8fa3b5" transform="rotate(8 1650 400)">23:07</text>
+<text x="1650" y="430" text-anchor="middle" font-family="Inter" font-size="22" fill="#5e7181" transform="rotate(8 1650 400)">Groupe Annales Bac : 3 PDF</text>
+<rect width="1920" height="1080" fill="url(#lamp2)"/>
+</svg>
+<div class="tag">Kaffrine · 23 h</div>
+<div id="stat"><div class="big">26,45 %</div><div class="lbl">des candidats admis dès le 1er tour<br>du Bac général 2026</div><div class="src">Source : Office du Bac, résultats provisoires du 1er tour (juillet 2026) — Le Soleil, APA News</div></div>
+</div>
+
+<!-- ACTE 2 : la vraie application -->
+<div id="s2" class="layer grid">
+ <div id="a2title">Voici Jàng<b>apprendre</b></div>
+ <div class="step" id="st1" style="top:330px"><i>1</i>Elle choisit un exercice type Bac</div>
+ <div class="step" id="st2" style="top:440px"><i>2</i>Elle envoie sa réponse, comme un message WhatsApp</div>
+ <div class="step" id="st3" style="top:580px"><i>3</i>Jàng lui montre sa première erreur</div>
+ <div class="blk" id="b1" style="top:330px;color:#0e7058">✅ Ce qui est juste</div>
+ <div class="blk" id="b2" style="top:430px;color:#c0392b;border-color:#c0392b;box-shadow:0 0 0 8px rgba(192,57,43,.12)">❌ Ta première erreur : 500 mL ≠ 0,500 L</div>
+ <div class="blk" id="b3" style="top:530px;color:#9a6a00">💡 La méthode, sans donner le résultat</div>
+ <div class="blk" id="b4" style="top:630px;color:#1b6fa8">➡️ Un exercice similaire pour vérifier</div>
+ <div id="phone"><canvas id="cv" width="780" height="1560"></canvas></div>
+</div>
+
+<!-- ACTE 3 : l'agent IA -->
+<div id="s3" class="layer grid">
+ <div id="a3title">Derrière Jàng : une base de corrigés + 2 agents IA</div>
+ <div class="node" id="n1" style="left:110px"><div class="ic">📱</div><h3>Ta réponse</h3><p>ID de l'exercice + ton calcul</p></div>
+ <div class="node" id="n2" style="left:470px"><div class="ic">📚</div><h3>Base de corrigés</h3><p>14 exercices type Bac + 14 fiches de cours (RAG)</p></div>
+ <div class="node" id="n3" style="left:830px"><div class="ic">🔎</div><h3>Agent 1 · Chercheur</h3><p>Retrouve le corrigé de référence et compare</p></div>
+ <div class="node" id="n4" style="left:1190px"><div class="ic">✍️</div><h3>Agent 2 · Rédacteur</h3><p>Correction en moins de 90 mots + exercice similaire</p></div>
+ <div class="node" id="n5" style="left:1550px;width:260px"><div class="ic">✅</div><h3>Ta correction</h3><p>Le soir même, moins de 100 Ko</p></div>
+ <div class="arrow" id="ar1" style="left:410px;width:60px"></div>
+ <div class="arrow" id="ar2" style="left:770px;width:60px"></div>
+ <div class="arrow" id="ar3" style="left:1130px;width:60px"></div>
+ <div class="arrow" id="ar4" style="left:1490px;width:60px"></div>
+ <img id="dify" src="R1-recuperation.jpg">
+ <div id="difyTxt">Le corrigé vient de notre base,<br>pas de l'imagination de l'IA.<small>Capture réelle de Dify : la question « JNG-PC-01 NaOH concentration » retrouve le bon exercice (score 0,75).</small></div>
+</div>
+
+<!-- ACTE 4 : le matin -->
+<div id="s4" class="layer" style="background:#f6e7c8">
+<svg width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+ <pattern id="seyes2" width="32" height="32" patternUnits="userSpaceOnUse"><rect width="32" height="32" fill="#fbf6e8"/><path d="M0 0H32M0 8H32M0 16H32M0 24H32" stroke="#cdd9ea" stroke-width="1"/><path d="M0 0V32" stroke="#aebbd2" stroke-width="1"/></pattern>
+ <radialGradient id="sun" cx="0.9" cy="0.05" r="0.9"><stop offset="0" stop-color="#fff3c4" stop-opacity=".9"/><stop offset=".5" stop-color="#ffd98a" stop-opacity=".25"/><stop offset="1" stop-color="#ffd98a" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1920" height="1080" fill="#b98a5e"/>
+<g transform="rotate(-4 700 540)">
+ <rect x="110" y="120" width="1000" height="840" fill="url(#seyes2)"/>
+ <line x1="210" y1="120" x2="210" y2="960" stroke="#e08a8a" stroke-width="3"/>
+ <text x="250" y="230" font-family="DejaVu Serif" font-style="italic" font-size="42" fill="#1d3f8f">Ex. similaire : 0,80 g NaOH, 250 mL</text>
+ <text x="250" y="340" font-family="DejaVu Serif" font-style="italic" font-size="42" fill="#1d3f8f">n = 0,80 / 40 = 0,020 mol</text>
+ <text x="250" y="450" font-family="DejaVu Serif" font-style="italic" font-size="42" fill="#1d3f8f">V = 250 mL = 0,250 L</text>
+ <text x="250" y="560" font-family="DejaVu Serif" font-style="italic" font-size="42" fill="#1d3f8f">C = 0,020 / 0,250 = 0,080 mol/L</text>
+ <text x="250" y="670" font-family="DejaVu Serif" font-style="italic" font-size="42" fill="#1d3f8f">pH = 14 + log C ≈ 12,9</text>
+ <g id="ok1" opacity="0"><path d="M880 420 l30 34 l60 -70" stroke="#1f9d55" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <g id="ok2" opacity="0"><path d="M880 640 l30 34 l60 -70" stroke="#1f9d55" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<rect width="1920" height="1080" fill="url(#sun)"/>
+</svg>
+<div id="ko"><div class="big">&lt; 100 Ko</div><div class="lbl">par correction — moins qu'une photo WhatsApp</div></div>
+<div id="goal">Un correcteur dans la poche de chaque élève de Terminale S en région.</div>
+<div class="tag" style="color:rgba(40,25,10,.6)">Le lendemain matin</div>
+</div>
+
+<!-- FIN -->
+<div id="fin" class="layer grid">
+ <div class="logo">Jàng<b>apprendre</b></div>
+ <div class="tl">« Jàng », en wolof : apprendre.</div>
+ <div class="cta">Essaie-le sur notre site</div>
+ <div class="url">cboye4991-sketch.github.io/jang-bac-helper</div>
+ <div class="qr"><img src="qr.png"></div>
+ <div class="qrl">Scanne pour ouvrir Jàng</div>
+ <div class="team">Cheikh BOYE · Adama DIOP — GET 409 Atelier IA · Swiss UMEF University, Dakar</div>
+ <div class="note">Corrigés rédigés par l'équipe, en cours de validation par des professeurs. Aminata est une persona fictive.</div>
+</div>
+
+<div id="sub"><span id="subt"></span></div>
+
+<script>
+const SUBS=[
+[0.6,4.6,"Kaffrine, 23 h. Aminata révise seule."],
+[4.8,8.6,"Personne pour lui dire où elle s'est trompée."],
+[8.8,15.6,"Au Bac 2026, à peine un candidat sur quatre a été admis dès le premier tour."],
+[16.2,21.6,"Voici Jàng. Aminata choisit un exercice type Bac et envoie sa réponse, comme un message WhatsApp."],
+[21.8,27.2,"Quelques secondes plus tard, Jàng lui montre sa première erreur."],
+[27.4,33.6,"Pas la solution : l'erreur."],
+[34.2,37.6,"Derrière, deux agents IA."],
+[37.8,44.2,"Le premier retrouve le corrigé de référence dans notre base d'exercices, au lieu de l'inventer."],
+[44.4,51.6,"Le second rédige une correction de moins de 90 mots, avec un exercice pour s'entraîner."],
+[52.2,56.6,"Une correction pèse moins qu'une photo WhatsApp."],
+[56.8,63.6,"Notre objectif : un correcteur dans la poche de chaque élève de Terminale S en région."],
+[64.0,67.6,"Jàng, en wolof : apprendre."],
+[67.8,72.6,"Essaie-le sur notre site."]];
+window.SUBS=SUBS;
+const $=id=>document.getElementById(id);
+const cl=(x)=>Math.max(0,Math.min(1,x));
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+// opacité : apparaît en [a,a+d], disparaît en [b-d,b]
+const win=(t,a,b,d=.6)=>cl((t-a)/d)*cl((b-t)/d);
+const IM=[];
+const ld=src=>new Promise(r=>{const im=new Image();im.onload=()=>r(im);im.onerror=()=>r(null);im.src=src;});
+window.loadImgs=async(n)=>{for(let i=0;i<n;i++){IM.push(await ld('app/a'+String(i).padStart(3,'0')+'.png'));}
+ await document.fonts.ready; const d=document.getElementById('dify'); if(!d.complete) await new Promise(r=>d.onload=r);
+ return IM.filter(Boolean).length};
+let lastF=-1;
+function appFrame(t){
+ if(t<17) return 0;
+ if(t<21.5) return 1+Math.floor((t-17)/4.5*31);
+ if(t<22.3) return 32;
+ if(t<24.2) return 33;
+ if(t<31) return 34+Math.floor(ease((t-24.2)/6.8)*60);
+ return 94;}
+window.render=function(t){
+ // acte 1
+ $('s1a').style.opacity=win(t,0,6.2,.8);
+ $('room').style.transform=`scale(${1+0.06*cl(t/6)})`;
+ $('s1b').style.opacity=win(t,5.4,16.4,.8);
+ $('x1').style.opacity=cl((t-6.6)/.4); $('x2').style.opacity=cl((t-7.6)/.4);
+ $('stat').style.opacity=win(t,9.0,16.0,.5); $('stat').style.transform=`translateY(${(1-cl((t-9)/.6))*30}px)`;
+ // acte 2
+ $('s2').style.opacity=win(t,15.8,34.4,.6);
+ [['st1',16.6],['st2',18.2],['st3',22.4]].forEach(([id,a])=>{$(id).style.opacity=win(t,a,26.9,.4)});
+ [['b1',27.2],['b2',28.2],['b3',29.4],['b4',30.6]].forEach(([id,a])=>{$(id).style.opacity=win(t,a,34.4,.4);$(id).style.transform=`translateX(${(1-cl((t-a)/.4))*-30}px)`});
+ const f=appFrame(t); if(f!==lastF&&IM[f]){const c=$('cv').getContext('2d');c.drawImage(IM[f],0,0,780,1560);lastF=f;}
+ // acte 3
+ $('s3').style.opacity=win(t,33.8,52.2,.6);
+ const nodeT=[34.6,35.4,38.4,45.0,49.0];
+ nodeT.forEach((a,i)=>{const n=$('n'+(i+1));n.style.opacity=cl((t-a)/.5);n.style.transform=`translateY(${(1-cl((t-a)/.5))*24}px)`;});
+ const act=t<37.8?1:t<41?2:t<44.4?3:t<49?4:5;
+ for(let i=1;i<=5;i++)$('n'+i).classList.toggle('on',i===act&&t>34.6);
+ [35.2,38.2,44.8,48.8].forEach((a,i)=>{$('ar'+(i+1)).style.transform=`scaleX(${cl((t-a)/.5)})`});
+ $('dify').style.opacity=win(t,40.2,52.2,.6); $('difyTxt').style.opacity=win(t,40.6,52.2,.6);
+ // acte 4
+ $('s4').style.opacity=win(t,51.8,64.4,.8);
+ $('ok1').setAttribute('opacity',cl((t-53.2)/.4)); $('ok2').setAttribute('opacity',cl((t-54.6)/.4));
+ $('ko').style.opacity=win(t,52.6,64.4,.5); $('goal').style.opacity=win(t,57.0,64.4,.5);
+ // fin
+ $('fin').style.opacity=cl((t-63.8)/.8);
+ // sous-titres
+ const s=SUBS.find(x=>t>=x[0]&&t<x[1]); $('subt').textContent=s?s[2]:''; $('sub').style.opacity=s?1:0;
+ const left=t>=15.8&&t<34.4; const S=$('sub').style; S.left=left?'150px':'50%'; S.transform=left?'none':'translateX(-50%)'; S.textAlign=left?'left':'center'; S.maxWidth=left?'960px':'1500px';
+};
+</script>
+</body></html>
