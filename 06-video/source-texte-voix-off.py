@@ -1,0 +1,15 @@
+L=[
+(0.6,4.6,"Kaffrine, vingt-trois heures. Aminata révise seule."),
+(4.8,8.6,"Personne pour lui dire où elle s'est trompée."),
+(8.8,15.6,"Au bac deux mille vingt-six, à peine un candidat sur quatre a été admis dès le premier tour."),
+(16.2,21.6,"Voici Djang. Aminata choisit un exercice type bac, et envoie sa réponse, comme un message Ouatsap."),
+(21.8,27.2,"Quelques secondes plus tard, Djang lui montre sa première erreur."),
+(27.4,33.6,"Pas la solution : l'erreur."),
+(34.2,37.6,"Derrière, deux agents I.A."),
+(37.8,44.2,"Le premier retrouve le corrigé de référence dans notre base d'exercices, au lieu de l'inventer."),
+(44.4,51.6,"Le second rédige une correction de moins de quatre-vingt-dix mots, avec un exercice pour s'entraîner."),
+(52.2,56.6,"Une correction pèse moins qu'une photo Ouatsap."),
+(56.8,63.6,"Notre objectif : un correcteur dans la poche de chaque élève de terminale S en région."),
+(64.0,67.6,"Djang, en wolof : apprendre."),
+(67.8,72.6,"Essaie-le sur notre site."),
+]

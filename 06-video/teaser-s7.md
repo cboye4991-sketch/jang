@@ -124,3 +124,11 @@ Version finale : la musique synthétique a été remplacée par des sons **Pixab
 
 Les fichiers audio Pixabay ne sont pas déposés ici (la licence interdit de les redistribuer seuls) ; ils sont dans `Downloads/class02/sons-pixabay` sur le Mac de Cheikh.
 
+
+### Version finale (05/10, 15 h) — voix off + une seule musique
+
+- **Voix off** : synthèse vocale neuronale française **Piper**, voix *siwis* (fr_FR, qualité medium, licence **CC-BY 4.0**), générée localement, phrase par phrase, calée sur les sous-titres. Texte : [`source-texte-voix-off.py`](source-texte-voix-off.py) (« Jàng » écrit « Djang » et « WhatsApp » écrit « Ouatsap » pour la prononciation).
+- **Musique** : un seul morceau du début à la fin, sans coupe — « Lofi Study - Calm Peaceful Chill Hop » de **FASSounds** (Pixabay), 75 BPM, rythmé mais doux. Il démarre dans son pont au piano (nuit, acte 1) pour que le beat revienne pile sur « Voici Jàng » (15,8 s) ; sa fin naturelle tombe sur la carte finale.
+- **Mixage** : la musique baisse de 9 dB quand la voix parle (voix ≈ 10 dB au-dessus du fond), sons d'interface très légers, −16 LUFS. Script : [`source-mixage-voix-off.py`](source-mixage-voix-off.py).
+
+Crédits à citer : voix « siwis » (Piper, CC-BY 4.0, corpus SIWIS) · musique « Lofi Study » — FASSounds / Pixabay.
