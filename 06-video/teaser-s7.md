@@ -92,7 +92,7 @@ Sous-titres : **Sous-titres automatiques** de CapCut, puis correction manuelle d
 
 ## 6. Version montée (05/10/2026)
 
-- [`jang-teaser.mp4`](jang-teaser.mp4) : 73 s, 1920×1080, 25 i/s, H.264 + AAC, sous-titres incrustés, bande-son originale (voir ci-dessous), volume normalisé à −16 LUFS.
+- [`jang-teaser.mp4`](jang-teaser.mp4) : 73 s, 1920×1080, 25 i/s, H.264 + AAC, sous-titres incrustés, bande-son mixée avec des sons Pixabay (voir « Crédits son »), volume normalisé à −16 LUFS.
 - [`jang-teaser.srt`](jang-teaser.srt) : les 13 sous-titres minutés. Ils servent aussi de texte pour enregistrer la voix off dans CapCut.
 - Les actes 2 et 3 montrent **le vrai MVP** et une **capture réelle de Dify** ; la correction affichée est une vraie réponse du workflow (JNG-PC-01, 05/10). Les actes 1 et 4 sont des illustrations (aucune image générée de personne réelle) ; Aminata est présentée comme persona fictive.
 - Source des scènes : [`source-video.html`](source-video.html), rendu image par image, puis assemblé avec ffmpeg.
@@ -108,4 +108,19 @@ Construite selon les usages des teasers d'app « problème → solution » : cha
 | Acte 3 · l'IA (34–52 s) | rythme plus « tech » : pluck en doubles croches, kick régulier | pop sur chaque bloc du schéma, souffle sur les flèches, riser |
 | Acte 4 + fin (52–73 s) | version pleine (nappe lumineuse, mélodie haute) puis accord final + carillon | carillons sur les coches vertes, whoosh vers la carte finale |
 
-Fichiers pour CapCut : [`jang-musique.mp3`](jang-musique.mp3) et [`jang-sons.mp3`](jang-sons.mp3) (pistes séparées). Avec une voix off : couper le son de la vidéo, importer les deux pistes, musique à **20–30 %**, sons à **60–80 %**, voix à 100 %. Source : [`source-bandeson.py`](source-bandeson.py).
+Version finale : la musique synthétique a été remplacée par des sons **Pixabay**, un par scène (ci-dessous) ; les sons d'interface synchronisés sont gardés ([`source-sons-interface.py`](source-sons-interface.py)). Mixage : [`source-mixage-pixabay.py`](source-mixage-pixabay.py).
+
+### Crédits son — Pixabay (licence de contenu Pixabay, utilisation gratuite)
+
+| Scène | Son | Auteur |
+|---|---|---|
+| Acte 1 · nuit | Sad Background Music_29Sec | prettyjohn1 |
+| Acte 2 · l'app | Kids Happy Background Music 21 Second | BombinSound |
+| Acte 3 · l'IA | Sport Epic Race - Loop | Abydos_Music |
+| Acte 4 · le matin | Event - Event Music | MFCC |
+| Carte finale | Promo - Promo Music | MFCC |
+| Transitions | Dramatic Intro Stinger Riser #08 · Dramatic Reveal Riser #12 | AberrantRealities |
+| Logo | Epic Logo Reveal Riser #11 | AberrantRealities |
+
+Les fichiers audio Pixabay ne sont pas déposés ici (la licence interdit de les redistribuer seuls) ; ils sont dans `Downloads/class02/sons-pixabay` sur le Mac de Cheikh.
+
