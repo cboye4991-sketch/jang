@@ -3,6 +3,22 @@
 > **GET 409 — Atelier IA** · Swiss UMEF University, Campus de Dakar · 2025–2026
 > Enseignant : M. Malick Faye Diagne
 
+## 📦 Rendu du 6 octobre — par où commencer
+
+| Livrable | Où le voir |
+|---|---|
+| **Application en ligne** (mise à jour) | **[cboye4991-sketch.github.io/jang-bac-helper](https://cboye4991-sketch.github.io/jang-bac-helper/)** · code et captures : [dépôt `jang-bac-helper`](https://github.com/cboye4991-sketch/jang-bac-helper) |
+| **Vidéo de présentation** (73 s, 1080p, voix off, sous-titres) | [`06-video/jang-teaser.mp4`](06-video/jang-teaser.mp4) · sous-titres [`.srt`](06-video/jang-teaser.srt) · [script et choix de montage](06-video/teaser-s7.md) |
+| **Atelier Claude Code** (E00 → E14, 15/15 épisodes) | [dépôt `atelier-claude-code-jang`](https://github.com/cboye4991-sketch/atelier-claude-code-jang) — rendu détaillé : `RENDU.html` |
+| Agent IA et RAG (Dify) | [`dify/`](dify/README.md) · [captures Dify](dify/captures/) : base indexée, tests de récupération, [workflow complet](dify/captures/L2b-workflow-complet.jpg) |
+| Démarche Design Thinking (S1 → S5+) | tableau [« Avancement »](#avancement) ci-dessous |
+
+[![Aperçu de la vidéo Jàng — cliquer pour la lire](06-video/apercu-video.jpg)](06-video/jang-teaser.mp4)
+
+![Jàng sur téléphone : accueil, exercices, correction, historique](https://raw.githubusercontent.com/cboye4991-sketch/jang-bac-helper/main/docs/captures/00-planche-jang.jpg)
+
+<sub>Crédits son de la vidéo : voix off « siwis » (Piper, licence CC-BY 4.0) · musique « Lofi Study – Calm Peaceful Chill Hop » de FASSounds (Pixabay). Les corrigés des exercices sont rédigés par l'équipe et en cours de validation par des professeurs ; Aminata est une persona fictive.</sub>
+
 ## Notre HMW définitif (S2)
 
 > **Comment pourrions-nous permettre aux élèves de Terminale scientifique des lycées de région, qui révisent seuls faute de professeur, de recevoir le soir même une explication fiable de leurs erreurs sur les exercices d'annales — depuis le téléphone qu'ils ont déjà et sans dépasser leur petit forfait data — afin d'aborder le Bac en sachant se corriger seuls ?**
@@ -61,7 +77,7 @@ Un **bot WhatsApp** qui :
 | S4 — MVP Lovable | [Prompts, journal et note d'itération](04-prototype/lovable-s4.md) · [captures](05-test/captures/) — 3 pages, filtres, illustrations SVG, fenêtre de correction reliée à Dify | ✅ Construit et testé. Code sorti de Lovable le 30/09 → dépôt [`jang-bac-helper`](https://github.com/cboye4991-sketch/jang-bac-helper), modifié sur VS Code, **en ligne : [https://cboye4991-sketch.github.io/jang-bac-helper/](https://cboye4991-sketch.github.io/jang-bac-helper/)** (GitHub Pages) ; la clé Dify reste dans une fonction Supabase ([guide](https://github.com/cboye4991-sketch/jang-bac-helper/tree/main/deploy)) |
 | S5 — RAG & intégration | [Base `Jang_KB_v1`](dify/knowledge/) · [Schéma V2](docs/architecture-v2.png) · [Plan de tests](dify/tests-rag.md) · [Journal S5](prompts/journal-de-prompts.md#séance-5--rag--intégration-dify) · [Note d'éthique](docs/note-ethique-rag.md) · [Plan B](soutenance/plan-b-s6.md) | ✅ Publié dans Dify (« S5 RAG v4 », RAG à deux recherches + EXTRAIRE_ID), T1–T11 OK · [captures Dify](dify/captures/) : base indexée, tests de récupération R1 et R5 (05/10) · [workflow complet (L2-b)](dify/captures/L2b-workflow-complet.jpg) |
 | S5+ — Agent dans l'app, enrichi, en ligne | [Fiche projet + parcours A–F](07-s5plus/fiche-projet-et-parcours.md) · [Tests T1–T6](07-s5plus/tests-t1-t6.md) · [Module D « Vérifie mon similaire »](07-s5plus/module-d-fonctionnalites.md) · [Indices, Bac blanc, voix, Défi WhatsApp](07-s5plus/fonctionnalites-app.md) | ✅ Dify « S5+ v7 », site en ligne https://cboye4991-sketch.github.io/jang-bac-helper/ |
-| S7 — Vidéo teaser | [**Vidéo MP4 (73 s, 1080p, sous-titrée)**](06-video/jang-teaser.mp4) · [sous-titres .srt](06-video/jang-teaser.srt) · [Script (template rempli)](06-video/jang-script-teaser.pptx) · [Prompts Kling / Veo, montage CapCut](06-video/teaser-s7.md) | ✅ Montée le 05/10 — voix off à enregistrer, puis dépôt Drive + e-Academy |
+| S7 — Vidéo teaser | [**Vidéo MP4 (73 s, 1080p, sous-titrée)**](06-video/jang-teaser.mp4) · [sous-titres .srt](06-video/jang-teaser.srt) · [Script (template rempli)](06-video/jang-script-teaser.pptx) · [Prompts Kling / Veo, montage CapCut](06-video/teaser-s7.md) | ✅ Livrée le 05/10 : voix off, musique lo-fi (Pixabay), sous-titres |
 
 ## Équipe
 
