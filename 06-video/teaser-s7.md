@@ -89,3 +89,46 @@ Sous-titres : **Sous-titres automatiques** de CapCut, puis correction manuelle d
 - [ ] Source du chiffre affichée à l'acte 1
 - [ ] URL du site à l'acte 4 : **cboye4991-sketch.github.io/jang-bac-helper** (+ QR code)
 - [ ] Upload Google Drive → lien « Tous les utilisateurs disposant du lien » → dépôt e-Academy (L2)
+
+## 6. Version montée (05/10/2026)
+
+- [`jang-teaser.mp4`](jang-teaser.mp4) : 73 s, 1920×1080, 25 i/s, H.264 + AAC, sous-titres incrustés, bande-son mixée avec des sons Pixabay (voir « Crédits son »), volume normalisé à −16 LUFS.
+- [`jang-teaser.srt`](jang-teaser.srt) : les 13 sous-titres minutés. Ils servent aussi de texte pour enregistrer la voix off dans CapCut.
+- Les actes 2 et 3 montrent **le vrai MVP** et une **capture réelle de Dify** ; la correction affichée est une vraie réponse du workflow (JNG-PC-01, 05/10). Les actes 1 et 4 sont des illustrations (aucune image générée de personne réelle) ; Aminata est présentée comme persona fictive.
+- Source des scènes : [`source-video.html`](source-video.html), rendu image par image, puis assemblé avec ffmpeg.
+
+### Bande-son (05/10) — composée pour le teaser, libre de droits
+
+Construite selon les usages des teasers d'app « problème → solution » : changement d'humeur au moment de la solution, transitions marquées (riser + whoosh), sons d'interface synchronisés avec l'écran, signature sonore sur le logo, musique assez basse pour une voix off.
+
+| Moment | Musique | Sons calés sur l'image |
+|---|---|---|
+| Acte 1 · nuit (0–16 s) | piano seul en *la mineur*, nappe sombre | grillons de Kaffrine, ratures au stylo, impact sourd sur « 26,45 % », riser → whoosh |
+| Acte 2 · l'app (16–34 s) | passage en *do majeur* (I–V–vi–IV), arpège de piano, battement léger | frappe au clavier, envoi du message, « Jàng écrit… », notification quand la correction arrive, « pop » sur ✅ ❌ 💡 ➡️ |
+| Acte 3 · l'IA (34–52 s) | rythme plus « tech » : pluck en doubles croches, kick régulier | pop sur chaque bloc du schéma, souffle sur les flèches, riser |
+| Acte 4 + fin (52–73 s) | version pleine (nappe lumineuse, mélodie haute) puis accord final + carillon | carillons sur les coches vertes, whoosh vers la carte finale |
+
+Version finale : la musique synthétique a été remplacée par des sons **Pixabay**, un par scène (ci-dessous) ; les sons d'interface synchronisés sont gardés ([`source-sons-interface.py`](source-sons-interface.py)). Mixage : [`source-mixage-pixabay.py`](source-mixage-pixabay.py).
+
+### Crédits son — Pixabay (licence de contenu Pixabay, utilisation gratuite)
+
+| Scène | Son | Auteur |
+|---|---|---|
+| Acte 1 · nuit | Sad Background Music_29Sec | prettyjohn1 |
+| Acte 2 · l'app | Kids Happy Background Music 21 Second | BombinSound |
+| Acte 3 · l'IA | Sport Epic Race - Loop | Abydos_Music |
+| Acte 4 · le matin | Event - Event Music | MFCC |
+| Carte finale | Promo - Promo Music | MFCC |
+| Transitions | Dramatic Intro Stinger Riser #08 · Dramatic Reveal Riser #12 | AberrantRealities |
+| Logo | Epic Logo Reveal Riser #11 | AberrantRealities |
+
+Les fichiers audio Pixabay ne sont pas déposés ici (la licence interdit de les redistribuer seuls) ; ils sont dans `Downloads/class02/sons-pixabay` sur le Mac de Cheikh.
+
+
+### Version finale (05/10, 15 h) — voix off + une seule musique
+
+- **Voix off** : synthèse vocale neuronale française **Piper**, voix *siwis* (fr_FR, qualité medium, licence **CC-BY 4.0**), générée localement, phrase par phrase, calée sur les sous-titres. Texte : [`source-texte-voix-off.py`](source-texte-voix-off.py) (« Jàng » écrit « Djang » et « WhatsApp » écrit « Ouatsap » pour la prononciation).
+- **Musique** : un seul morceau du début à la fin, sans coupe — « Lofi Study - Calm Peaceful Chill Hop » de **FASSounds** (Pixabay), 75 BPM, rythmé mais doux. Il démarre dans son pont au piano (nuit, acte 1) pour que le beat revienne pile sur « Voici Jàng » (15,8 s) ; sa fin naturelle tombe sur la carte finale.
+- **Mixage** : la musique baisse de 9 dB quand la voix parle (voix ≈ 10 dB au-dessus du fond), sons d'interface très légers, −16 LUFS. Script : [`source-mixage-voix-off.py`](source-mixage-voix-off.py).
+
+Crédits à citer : voix « siwis » (Piper, CC-BY 4.0, corpus SIWIS) · musique « Lofi Study » — FASSounds / Pixabay.
