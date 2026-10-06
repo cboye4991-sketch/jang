@@ -15,7 +15,7 @@
 
 > **Deux applications Jàng, deux rôles différents**
 > - **L'application du projet** : [jang-bac-helper](https://cboye4991-sketch.github.io/jang-bac-helper/). C'est **le livrable du cours** : prototype Lovable (S4), repris dans VS Code et Claude Code, correction par le workflow Dify via une fonction Supabase. Les deux vidéos la présentent.
-> - **L'app de l'atelier Claude Code** : [atelier-claude-code-jang/app](https://cboye4991-sketch.github.io/atelier-claude-code-jang/app/). C'est **un exercice** : le projet fil rouge des épisodes E08 à E10, reconstruit de zéro par Claude Code (à la place de « PromptLens » dans l'atelier). Elle a des fonctions différentes : catalogue, carnet de progression, export JSON, correction via un relais Cloudflare.
+> - **Les réalisations de l'atelier Claude Code** (E00 → E14, tout l'atelier refait avec Jàng) : [landing V2, design avec frontend-design](https://cboye4991-sketch.github.io/atelier-claude-code-jang/03-landing/v2-skill/), [landing V1](https://cboye4991-sketch.github.io/atelier-claude-code-jang/03-landing/v1-no-skill/) et [l'app du projet fil rouge](https://cboye4991-sketch.github.io/atelier-claude-code-jang/app/), reconstruite de zéro par Claude Code à la place de « PromptLens ». C'est **un exercice** : même sujet, mais un autre code et d'autres fonctions (catalogue, carnet de progression, export JSON, correction via un relais Cloudflare).
 
 [![Aperçu de la vidéo Jàng — cliquer pour la lire](06-video/apercu-video.jpg)](https://cboye4991-sketch.github.io/jang-bac-helper/video/)
 
