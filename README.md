@@ -8,12 +8,12 @@
 | Livrable | Où le voir |
 |---|---|
 | **Application en ligne** (mise à jour) | **[cboye4991-sketch.github.io/jang-bac-helper](https://cboye4991-sketch.github.io/jang-bac-helper/)** · code et captures : [dépôt `jang-bac-helper`](https://github.com/cboye4991-sketch/jang-bac-helper) |
-| **Vidéo de présentation** (73 s, 1080p, voix off, sous-titres) | [▶ **Regarder en ligne**](https://cboye4991-sketch.github.io/atelier-claude-code-jang/RENDU.html#projet) · fichier [`06-video/jang-teaser.mp4`](06-video/jang-teaser.mp4) · sous-titres [`.srt`](06-video/jang-teaser.srt) · [script et choix de montage](06-video/teaser-s7.md) |
+| **Vidéos de présentation** : teaser (73 s, voix off) et « Le prof qui répond à minuit » (60 s, vertical) | [▶ **Regarder les deux vidéos en ligne**](https://cboye4991-sketch.github.io/jang-bac-helper/video/) · fichier [`06-video/jang-teaser.mp4`](06-video/jang-teaser.mp4) · sous-titres [`.srt`](06-video/jang-teaser.srt) · [script et choix de montage](06-video/teaser-s7.md) |
 | **Atelier Claude Code** (E00 → E14, 15/15 épisodes) | [dépôt `atelier-claude-code-jang`](https://github.com/cboye4991-sketch/atelier-claude-code-jang) — rendu détaillé avec captures : [RENDU.html](https://cboye4991-sketch.github.io/atelier-claude-code-jang/RENDU.html) |
 | Agent IA et RAG (Dify) | [`dify/`](dify/README.md) · [captures Dify](dify/captures/) : base indexée, tests de récupération, [workflow complet](dify/captures/L2b-workflow-complet.jpg) |
 | Démarche Design Thinking (S1 → S5+) | tableau [« Avancement »](#avancement) ci-dessous |
 
-[![Aperçu de la vidéo Jàng — cliquer pour la lire](06-video/apercu-video.jpg)](https://cboye4991-sketch.github.io/atelier-claude-code-jang/RENDU.html#projet)
+[![Aperçu de la vidéo Jàng — cliquer pour la lire](06-video/apercu-video.jpg)](https://cboye4991-sketch.github.io/jang-bac-helper/video/)
 
 ![Jàng sur téléphone : accueil, exercices, correction, historique](https://raw.githubusercontent.com/cboye4991-sketch/jang-bac-helper/main/docs/captures/00-planche-jang.jpg)
 
